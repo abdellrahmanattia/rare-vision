@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rare Vision | قطع نادرة. نسخ محدودة.</title>
+<meta name="description" content="Rare Vision - متجر إلكتروني للسنيكرز والستريتوير الأصلي. اطلب عبر تيليجرام واستلم أينما كنت.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#top" class="logo">RARE<span>VISION</span></a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#top">الرئيسية</a>
+      <a href="#shop">المتجر</a>
+      <a href="#trust">لماذا نحن</a>
+      <a href="#footer">تواصل معنا</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="cartToggle" aria-label="سلة المشتريات">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.4"/><circle cx="17" cy="21" r="1.4"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="القائمة">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
+    <source src="assets/hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <span class="eyebrow">RARE VISION — إصدارات محدودة</span>
+    <h1 class="hero-title">لأنّ ذوقك<br><span>نادر.</span></h1>
+    <p class="hero-sub">أحدث موديلات السنيكرز والستريتوير الأصلي، بأسعار منافسة وتوصيل لجميع المحافظات.</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn btn-primary">تسوق الآن</a>
+      <a href="#trust" class="btn btn-ghost">تعرف علينا</a>
+    </div>
+  </div>
+
+  <a href="#shop" class="scroll-hint" aria-label="انتقل للمتجر">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v15M12 19l-6-6M12 19l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- ===================== SHOP ===================== -->
+<section class="shop-section" id="shop">
+  <div class="section-head">
+    <span class="section-eyebrow">المجموعة</span>
+    <h2>تسوّق القطع النادرة</h2>
+  </div>
+
+  <div class="shop-toolbar">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInput" placeholder="ابحث عن موديل، ماركة، أو لون...">
+      <button class="search-clear" id="searchClear" aria-label="مسح البحث" hidden>&times;</button>
+    </div>
+
+    <div class="category-chips" id="categoryChips">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <p class="results-meta" id="resultsMeta"></p>
+
+  <div class="products-grid" id="productsGrid">
+    <!-- product cards injected by JS -->
+  </div>
+
+  <div class="empty-state" id="emptyState" hidden>
+    <p>لا توجد منتجات مطابقة لبحثك</p>
+    <button class="btn btn-ghost" id="resetFilters">إعادة تعيين الفلاتر</button>
+  </div>
+
+  <div class="loading-state" id="loadingState">
+    <div class="spinner"></div>
+    <p>جاري تحميل المنتجات...</p>
+  </div>
+</section>
+
+<!-- ===================== TRUST / FEATURES ===================== -->
+<section class="trust-bar" id="trust">
+  <div class="trust-item">
+    <span class="trust-icon">🚚</span>
+    <div>
+      <h3>توصيل لجميع المحافظات</h3>
+      <p>شحن سريع وآمن أينما كنت في مصر.</p>
+    </div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">🔍</span>
+    <div>
+      <h3>فحص قبل الدفع</h3>
+      <p>افتح الطرد وتأكد من المنتج قبل ما تدفع.</p>
+    </div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">🔄</span>
+    <div>
+      <h3>استبدال خلال 48 ساعة</h3>
+      <p>مش مقاسك أو مش عاجبك؟ تقدر تستبدله بسهولة.</p>
+    </div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">💬</span>
+    <div>
+      <h3>طلب مباشر عبر تيليجرام</h3>
+      <p>اطلب بضغطة زر، وهيوصلك تأكيد فوري.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer" id="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#top" class="logo">RARE<span>VISION</span></a>
+      <p>مش مجرد جزمة... رؤيتك النادرة لأسلوبك. نختار لك أفضل القطع الأصلية من أشهر الماركات العالمية.</p>
+      <div class="social-links">
+        <a href="#" aria-label="تيليجرام">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6c.2-1-.7-1.7-1.6-1.3L2.5 10.4c-1 .4-1 1.9.1 2.2l4.4 1.4 1.7 5.3c.2.7 1 .9 1.6.4l2.5-2.2 4.5 3.3c.7.5 1.7.1 1.9-.8l3.7-15.4z"/></svg>
+        </a>
+        <a href="#" aria-label="واتساب">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.8 14.2c-.2.6-1.3 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.6.7 1.9.8 2.1.1.2.1.4 0 .6-.1.2-.2.3-.3.5-.2.2-.3.3-.5.5-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.6.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.7.8.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg>
+        </a>
+        <a href="#" aria-label="انستجرام">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>روابط سريعة</h4>
+      <a href="#top">الرئيسية</a>
+      <a href="#shop">المتجر</a>
+      <a href="#trust">لماذا نحن</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>تواصل معنا</h4>
+      <a href="#">تيليجرام: @RareVisionEG</a>
+      <a href="#">واتساب: 01000000000</a>
+      <a href="#">gangvision@example.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© <span id="year"></span> Rare Vision. جميع الحقوق محفوظة.</p>
+  </div>
+</footer>
+
+<!-- ===================== CART OVERLAY + PANEL ===================== -->
+<div class="overlay" id="cartOverlay"></div>
+
+<aside class="cart-panel" id="cartPanel" aria-label="سلة المشتريات">
+  <div class="cart-header">
+    <h3>سلة المشتريات</h3>
+    <button class="icon-btn" id="cartClose" aria-label="إغلاق السلة">&times;</button>
+  </div>
+
+  <div class="cart-body" id="cartBody">
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-empty" id="cartEmpty">
+      <p>سلتك فارغة حالياً</p>
+      <a href="#shop" class="btn btn-ghost" id="cartEmptyShop">تصفح المنتجات</a>
+    </div>
+  </div>
+
+  <!-- Checkout form (hidden until user clicks "إتمام الطلب") -->
+  <form class="checkout-form" id="checkoutForm" hidden novalidate>
+    <h4>بيانات التوصيل</h4>
+
+    <label>
+      الاسم الكامل
+      <input type="text" id="custName" name="name" required placeholder="مثال: أحمد محمد">
+    </label>
+    <label>
+      رقم الهاتف
+      <input type="tel" id="custPhone" name="phone" required placeholder="01xxxxxxxxx">
+    </label>
+    <label>
+      العنوان بالتفصيل (المحافظة، المنطقة، الشارع)
+      <textarea id="custAddress" name="address" required placeholder="مثال: القاهرة، مدينة نصر، شارع مكرم عبيد"></textarea>
+    </label>
+    <label>
+      ملاحظات (اختياري)
+      <textarea id="custNote" name="note" placeholder="أي تفاصيل إضافية عن طلبك"></textarea>
+    </label>
+
+    <p class="form-error" id="formError" hidden></p>
+
+    <div class="checkout-actions">
+      <button type="button" class="btn btn-ghost" id="checkoutBack">رجوع</button>
+      <button type="submit" class="btn btn-primary" id="checkoutSubmit">
+        <span class="btn-text">إرسال الطلب عبر تيليجرام</span>
+        <span class="btn-spinner" hidden></span>
+      </button>
+    </div>
+  </form>
+
+  <!-- Thank you state -->
+  <div class="thank-you" id="thankYou" hidden>
+    <div class="thank-you-icon">✓</div>
+    <h4>تم إرسال طلبك بنجاح!</h4>
+    <p>شكراً لثقتك في Rare Vision. هنتواصل معك قريباً لتأكيد التوصيل.</p>
+    <button class="btn btn-primary" id="thankYouClose">تمام، متابعة التسوق</button>
+  </div>
+
+  <div class="cart-footer" id="cartFooter">
+    <div class="cart-total-row">
+      <span>الإجمالي</span>
+      <span id="cartTotal">0 ج.م</span>
+    </div>
+    <button class="btn btn-primary btn-block" id="checkoutBtn" disabled>إتمام الطلب</button>
+  </div>
+</aside>
+
+<!-- Toast notifications -->
+<div class="toast" id="toast"></div>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
