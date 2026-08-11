@@ -1,0 +1,253 @@
+# ============================================================================
+# RARE VISION — Decap CMS Configuration
+#
+# This CMS edits a single file, data/products.json, structured as:
+#   { "products": [ {...}, {...}, ... ] }
+# The storefront (js/main.js) fetches that file directly at runtime.
+#
+# BEFORE THIS WORKS YOU MUST:
+#   1. Replace `repo` below with your GitHub "username/repository".
+#   2. Replace `base_url` below with your live Cloudflare Pages URL
+#      (or custom domain) once you know it.
+#   3. Set up GitHub OAuth so editors can log in — see README.md,
+#      section "Setting Up Decap CMS Authentication".
+# ============================================================================
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/rare-vision      # <-- CHANGE THIS
+  branch: main
+  base_url: https://YOUR_SITE.pages.dev        # <-- CHANGE THIS (no trailing slash)
+  auth_endpoint: api/auth                      # matches functions/api/auth.js
+
+# Lets you run `npx decap-server` locally and test content edits at
+# http://localhost:8080/admin without needing GitHub OAuth configured yet.
+# Safe to leave on — it only activates when Decap detects the local proxy.
+local_backend: true
+
+# Editorial workflow adds a Draft -> In Review -> Ready to Publish pipeline
+# (each change becomes a GitHub branch + pull request instead of an instant
+# commit to main). This is the closer-to-Shopify/Amazon-style safety net for
+# a store with more than one person touching inventory. Delete this line if
+# you want single-admin edits to commit directly to `main` instead.
+publish_mode: editorial_workflow
+
+locale: "en"
+
+media_folder: "assets/products"   # uploaded images are committed here
+public_folder: "assets/products"  # and referenced with this URL prefix
+
+collections:
+  - name: "products"
+    label: "Product Catalog"
+    files:
+      - file: "data/products.json"
+        label: "All Products"
+        name: "products"
+        description: >
+          Add, edit, reorder, or remove products below. Every change is
+          saved as a GitHub commit; Cloudflare Pages automatically rebuilds
+          the live site within about a minute of publishing.
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.brand}} ({{fields.sku}})"
+            fields:
+
+              # ----------------------------------------------------------------
+              # Identification (added beyond the original spec: every entry in
+              # a single-file list collection needs a stable unique key, and a
+              # human-readable title is needed before anything else makes sense
+              # in the UI). Use SKU as your source of truth if you'd rather not
+              # think about a second identifier.
+              # ----------------------------------------------------------------
+              - label: "Product ID (internal, unique)"
+                name: "id"
+                widget: "string"
+                required: true
+                hint: "Lowercase, hyphenated, no spaces — e.g. nova-runner-sneaker. Never change this after publishing; the shopping cart uses it."
+                pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens only"]
+
+              - label: "Product Name"
+                name: "name"
+                widget: "string"
+                required: true
+                hint: "The full display name shown to customers."
+
+              # ----------------------------------------------------------------
+              # 1. Target Demographics
+              # ----------------------------------------------------------------
+              - label: "Gender / Category"
+                name: "gender"
+                widget: "select"
+                options: ["Men", "Women", "Unisex", "Kids"]
+                default: "Unisex"
+                required: true
+
+              # ----------------------------------------------------------------
+              # 2. Product Categorization
+              # ----------------------------------------------------------------
+              - label: "Product Type"
+                name: "productType"
+                widget: "select"
+                options: ["Sneakers", "Jackets", "T-Shirts", "Watches", "Hats", "Accessories"]
+                required: true
+
+              # ----------------------------------------------------------------
+              # 3. Brand & Identification
+              # ----------------------------------------------------------------
+              - label: "Brand Name"
+                name: "brand"
+                widget: "string"
+                required: true
+
+              - label: "SKU"
+                name: "sku"
+                widget: "string"
+                required: true
+                hint: "Your internal Stock Keeping Unit code, e.g. RV-SNK-1024"
+
+              # ----------------------------------------------------------------
+              # 4. Pricing Strategy
+              # ----------------------------------------------------------------
+              - label: "Current Price (USD)"
+                name: "price"
+                widget: "number"
+                value_type: "float"
+                min: 0
+                step: 0.01
+                required: true
+
+              - label: "Compare-at Price (USD)"
+                name: "compareAtPrice"
+                widget: "number"
+                value_type: "float"
+                min: 0
+                step: 0.01
+                required: false
+                hint: "Optional. Set this higher than Current Price to show a strikethrough 'was' price and imply a discount. Leave blank if the item isn't on sale."
+
+              # ----------------------------------------------------------------
+              # 5. Descriptions
+              # ----------------------------------------------------------------
+              - label: "Short Description"
+                name: "shortDescription"
+                widget: "string"
+                required: true
+                hint: "One sentence for the product card grid. Aim for under 90 characters."
+
+              - label: "Full Description"
+                name: "description"
+                widget: "markdown"
+                required: false
+                minimal: true
+                buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"]
+                editor_components: []
+                hint: "Shown on the product detail view. Basic formatting only (bold, italic, links, lists)."
+
+              # ----------------------------------------------------------------
+              # 6. Media Gallery
+              # ----------------------------------------------------------------
+              - label: "Primary Image"
+                name: "image"
+                widget: "image"
+                required: true
+                hint: "The main image shown on the product card and as the default detail-view image."
+
+              - label: "Additional Images"
+                name: "gallery"
+                widget: "list"
+                required: false
+                summary: "{{fields.image}}"
+                hint: "Optional extra angles/detail shots. Shown as clickable thumbnails under the primary image."
+                field:
+                  label: "Image"
+                  name: "image"
+                  widget: "image"
+
+              # ----------------------------------------------------------------
+              # 7. Product Specifications (structured key-value data)
+              # ----------------------------------------------------------------
+              - label: "Specifications"
+                name: "specifications"
+                widget: "list"
+                required: false
+                summary: "{{fields.label}}: {{fields.value}}"
+                fields:
+                  - label: "Label"
+                    name: "label"
+                    widget: "string"
+                    hint: "e.g. Material, Fit, Water Resistance"
+                  - label: "Value"
+                    name: "value"
+                    widget: "string"
+                    hint: "e.g. 100% Cotton, Oversized, 100m / 10 ATM"
+
+              # ----------------------------------------------------------------
+              # 8. Promotional Badges
+              # ----------------------------------------------------------------
+              - label: "Badges"
+                name: "badges"
+                widget: "select"
+                multiple: true
+                required: false
+                options: ["Best Seller", "New Arrival", "Limited Edition"]
+
+              # ----------------------------------------------------------------
+              # 9. Ratings & Reviews
+              # ----------------------------------------------------------------
+              - label: "Average Rating"
+                name: "averageRating"
+                widget: "number"
+                value_type: "float"
+                min: 0
+                max: 5
+                step: 0.1
+                required: false
+                default: 0
+                hint: "0–5 scale, e.g. 4.7"
+
+              - label: "Review Count"
+                name: "reviewCount"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                required: false
+                default: 0
+
+              # ----------------------------------------------------------------
+              # 10. Smart Sizing & Inventory Matrix
+              #     Leave this entire list empty for products that don't use
+              #     sizes (watches, hats, accessories). The storefront checks
+              #     the list's length and skips size UI entirely when it's empty.
+              # ----------------------------------------------------------------
+              - label: "Sizes & Stock"
+                name: "sizes"
+                widget: "list"
+                required: false
+                default: []
+                hint: "Optional. Add one row per available size. Leave completely empty for products without sizes."
+                summary: "{{fields.size}} — {{fields.stockStatus}}"
+                fields:
+                  - label: "Size Label"
+                    name: "size"
+                    widget: "string"
+                    hint: "e.g. 36, 42, S, XL"
+                  - label: "Stock Status"
+                    name: "stockStatus"
+                    widget: "select"
+                    options: ["In Stock", "Out of Stock"]
+                    default: "In Stock"
+
+              # ----------------------------------------------------------------
+              # Overall stock flag — added for products that skip the sizes
+              # list entirely (a watch has no sizes, but can still sell out).
+              # The storefront only looks at this when Sizes & Stock is empty.
+              # ----------------------------------------------------------------
+              - label: "In Stock"
+                name: "inStock"
+                widget: "boolean"
+                default: true
+                required: false
+                hint: "Only used when 'Sizes & Stock' above is left empty. Ignored otherwise — stock is tracked per size instead."
