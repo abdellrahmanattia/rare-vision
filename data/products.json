@@ -195,7 +195,23 @@
       "sizes": [
         {
           "stockStatus": "In Stock",
-          "size": "38, 39, 40, 41, 42, 43, 44"
+          "size": "38"
+        },
+        {
+          "stockStatus": "In Stock",
+          "size": "39"
+        },
+        {
+          "stockStatus": "In Stock",
+          "size": "40"
+        },
+        {
+          "stockStatus": "In Stock",
+          "size": "41"
+        },
+        {
+          "stockStatus": "Out of Stock",
+          "size": "42"
         }
       ],
       "gallery": [
