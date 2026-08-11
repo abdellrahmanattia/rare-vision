@@ -8,12 +8,13 @@
    1. CONFIG            — things YOU must edit before going live
    2. STATE + DOM refs
    3. INIT / DATA LOADING
-   4. SEARCH + CATEGORY FILTERING
-   5. RENDERING PRODUCTS
-   6. CART (localStorage backed)
-   7. CART PANEL UI (open/close)
-   8. CHECKOUT -> TELEGRAM
-   9. UTILITIES (toast, format, escape, debounce)
+   4. SEARCH + CATEGORY + GENDER FILTERING
+   5. RENDERING PRODUCT CARDS
+   6. PRODUCT DETAIL MODAL (gallery nav, dynamic sizing, dynamic pricing)
+   7. CART (localStorage backed, size-aware line items)
+   8. CART PANEL UI (open/close)
+   9. CHECKOUT -> TELEGRAM
+   10. UTILITIES (toast, format, escape, debounce, markdown-lite, stars)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -21,14 +22,14 @@
    -------------------------------------------------------------------------- */
 const CONFIG = {
   // Create a bot with @BotFather on Telegram, copy the token it gives you.
-  TELEGRAM_BOT_TOKEN: '8628571545:AAE-aYI0nTra7T_k1WfcKNOm-bfS0CBZEmQ',
+  TELEGRAM_BOT_TOKEN: 'YOUR_BOT_TOKEN_HERE',
 
   // The chat ID that should RECEIVE new orders (your personal chat, or a
   // group/channel the bot has been added to). See README.md for how to find it.
-  TELEGRAM_CHAT_ID: '6472884024',
+  TELEGRAM_CHAT_ID: 'YOUR_CHAT_ID_HERE',
 
   PRODUCTS_URL: 'data/products.json',
-  CURRENCY: 'ج.م',
+  CURRENCY: '$',
   CART_STORAGE_KEY: 'rareVisionCart',
   STORE_NAME: 'Rare Vision',
 };
@@ -39,10 +40,17 @@ const CONFIG = {
 const state = {
   products: [],
   filtered: [],
-  activeCategory: 'all',
+  activeCategory: 'all', // matches product.productType
+  activeGender: 'all',   // matches product.gender
   searchTerm: '',
-  cart: [],           // [{id, qty}]
+  cart: [],              // [{id, size /* string|null */, qty}]
   isSubmitting: false,
+
+  // Product detail modal
+  modalProduct: null,
+  modalSelectedImage: '',
+  modalSelectedSize: null,
+  modalQty: 1,
 };
 
 const dom = {
@@ -53,6 +61,7 @@ const dom = {
   searchInput: document.getElementById('searchInput'),
   searchClear: document.getElementById('searchClear'),
   categoryChips: document.getElementById('categoryChips'),
+  genderFilter: document.getElementById('genderFilter'),
   resetFilters: document.getElementById('resetFilters'),
 
   cartToggle: document.getElementById('cartToggle'),
@@ -82,6 +91,11 @@ const dom = {
   navToggle: document.getElementById('navToggle'),
   mainNav: document.getElementById('mainNav'),
 
+  modalOverlay: document.getElementById('modalOverlay'),
+  productModal: document.getElementById('productModal'),
+  modalClose: document.getElementById('modalClose'),
+  modalContent: document.getElementById('modalContent'),
+
   toast: document.getElementById('toast'),
   year: document.getElementById('year'),
 };
@@ -101,7 +115,10 @@ async function init() {
     const res = await fetch(CONFIG.PRODUCTS_URL, { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    state.products = Array.isArray(data) ? data : [];
+    // Decap CMS "files" collections always write an object, so the file
+    // looks like { "products": [...] }. We also accept a bare array so this
+    // still works if you ever generate products.json some other way.
+    state.products = Array.isArray(data) ? data : Array.isArray(data.products) ? data.products : [];
   } catch (err) {
     console.error('Failed to load products.json', err);
     dom.loadingState.innerHTML =
@@ -117,24 +134,22 @@ async function init() {
 }
 
 /* --------------------------------------------------------------------------
-   4. SEARCH + CATEGORY FILTERING
+   4. SEARCH + CATEGORY + GENDER FILTERING
    -------------------------------------------------------------------------- */
 function buildCategoryChips() {
-  const categories = [];
+  const types = [];
   const seen = new Set();
 
   state.products.forEach((p) => {
-    if (!seen.has(p.category)) {
-      seen.add(p.category);
-      categories.push({ id: p.category, label: p.categoryLabel || p.category });
+    if (p.productType && !seen.has(p.productType)) {
+      seen.add(p.productType);
+      types.push(p.productType);
     }
   });
 
   const chipsHtml = [
-    `<button class="chip active" data-category="all">الكل</button>`,
-    ...categories.map(
-      (c) => `<button class="chip" data-category="${escapeHtml(c.id)}">${escapeHtml(c.label)}</button>`
-    ),
+    `<button class="chip active" data-category="all">All</button>`,
+    ...types.map((t) => `<button class="chip" data-category="${escapeHtml(t)}">${escapeHtml(t)}</button>`),
   ].join('');
 
   dom.categoryChips.innerHTML = chipsHtml;
@@ -158,12 +173,13 @@ const handleSearchInput = debounce(() => {
 function applyFilters() {
   const term = state.searchTerm;
   const cat = state.activeCategory;
+  const gender = state.activeGender;
 
   state.filtered = state.products.filter((p) => {
-    const matchesCategory = cat === 'all' || p.category === cat;
-    if (!matchesCategory) return false;
+    if (cat !== 'all' && p.productType !== cat) return false;
+    if (gender !== 'all' && p.gender !== gender) return false;
     if (!term) return true;
-    const haystack = `${p.name} ${p.brand} ${p.categoryLabel || ''}`.toLowerCase();
+    const haystack = `${p.name} ${p.brand} ${p.productType} ${p.shortDescription || ''}`.toLowerCase();
     return haystack.includes(term);
   });
 
@@ -171,8 +187,14 @@ function applyFilters() {
 }
 
 /* --------------------------------------------------------------------------
-   5. RENDERING PRODUCTS
+   5. RENDERING PRODUCT CARDS
    -------------------------------------------------------------------------- */
+function isProductAvailable(p) {
+  const sizes = Array.isArray(p.sizes) ? p.sizes : [];
+  if (sizes.length > 0) return sizes.some((s) => s.stockStatus === 'In Stock');
+  return p.inStock !== false;
+}
+
 function renderProducts(list) {
   dom.resultsMeta.textContent = `عدد النتائج: ${list.length}`;
 
@@ -182,58 +204,284 @@ function renderProducts(list) {
     return;
   }
   dom.emptyState.hidden = true;
+  dom.productsGrid.innerHTML = list.map((p, i) => productCardHtml(p, i)).join('');
+}
 
-  dom.productsGrid.innerHTML = list
-    .map((p, i) => {
-      const onSale = p.oldPrice && p.oldPrice > p.price;
-      const badge = !p.inStock
-        ? ''
-        : p.isNew
-        ? `<span class="card-badge new">جديد</span>`
-        : onSale
-        ? `<span class="card-badge">خصم</span>`
-        : '';
+function productCardHtml(p, index) {
+  const onSale = typeof p.compareAtPrice === 'number' && p.compareAtPrice > p.price;
+  const hasSizes = Array.isArray(p.sizes) && p.sizes.length > 0;
+  const available = isProductAvailable(p);
+  const badges = Array.isArray(p.badges) ? p.badges : [];
 
-      return `
-      <article class="product-card" style="animation-delay:${Math.min(i, 8) * 40}ms">
-        <div class="card-media">
-          <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy">
-          ${badge}
-          ${!p.inStock ? '<div class="out-of-stock">غير متوفر حالياً</div>' : ''}
-        </div>
-        <div class="card-body">
-          <span class="card-brand">${escapeHtml(p.brand)}</span>
-          <h3 class="card-name">${escapeHtml(p.name)}</h3>
-          <div class="card-price-row">
-            <span class="card-price">${formatPrice(p.price)}</span>
-            ${onSale ? `<span class="card-price-old">${formatPrice(p.oldPrice)}</span>` : ''}
-          </div>
-          <button class="card-add" data-id="${escapeHtml(p.id)}" ${!p.inStock ? 'disabled' : ''}>
-            ${p.inStock ? 'أضف للسلة' : 'غير متوفر'}
-          </button>
-        </div>
-      </article>`;
-    })
-    .join('');
+  const ctaLabel = !available ? 'Out of Stock' : hasSizes ? 'Select Size' : 'Add to Cart';
+  const ctaAction = hasSizes ? 'open-modal' : 'quick-add';
 
-  dom.productsGrid.querySelectorAll('.card-add').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      if (btn.disabled) return;
-      addToCart(btn.dataset.id);
-      btn.classList.add('added');
-      const original = btn.textContent;
-      btn.textContent = 'أُضيف ✓';
-      setTimeout(() => {
-        btn.classList.remove('added');
-        btn.textContent = original;
-      }, 1100);
-    });
+  return `
+  <article class="product-card" style="animation-delay:${Math.min(index, 8) * 40}ms" data-id="${escapeHtml(p.id)}">
+    <div class="card-media" data-action="open-modal" data-id="${escapeHtml(p.id)}">
+      <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy">
+      ${onSale ? '<span class="card-badge">Sale</span>' : ''}
+      ${badges.length ? `<div class="badge-row">${badges.map((b) => `<span class="badge-pill">${escapeHtml(b)}</span>`).join('')}</div>` : ''}
+      ${!available ? '<div class="out-of-stock">Out of Stock</div>' : ''}
+    </div>
+    <div class="card-body">
+      <span class="card-brand">${escapeHtml(p.brand)}</span>
+      <h3 class="card-name" data-action="open-modal" data-id="${escapeHtml(p.id)}">${escapeHtml(p.name)}</h3>
+      <div class="card-rating">
+        <span class="stars" aria-hidden="true">${renderStars(p.averageRating)}</span>
+        <span class="rating-count">(${Number(p.reviewCount) || 0})</span>
+      </div>
+      <div class="card-price-row">
+        <span class="card-price">${formatPrice(p.price)}</span>
+        ${onSale ? `<span class="card-price-old">${formatPrice(p.compareAtPrice)}</span>` : ''}
+      </div>
+      <button class="card-add" data-action="${ctaAction}" data-id="${escapeHtml(p.id)}" ${!available ? 'disabled' : ''}>
+        ${ctaLabel}
+      </button>
+    </div>
+  </article>`;
+}
+
+// Event delegation: one listener handles every card, including cards
+// re-rendered after filtering, so nothing needs to be re-bound manually.
+function bindProductGridEvents() {
+  dom.productsGrid.addEventListener('click', (e) => {
+    const target = e.target.closest('[data-action]');
+    if (!target) return;
+    const id = target.dataset.id;
+    if (!id) return;
+
+    if (target.dataset.action === 'open-modal') {
+      openProductModal(id);
+    } else if (target.dataset.action === 'quick-add') {
+      const result = addToCart(id, null, 1);
+      if (result.ok) {
+        const product = findProduct(id);
+        showToast(`تمت إضافة "${product.name}" إلى السلة`);
+        const original = target.textContent;
+        target.textContent = 'Added ✓';
+        target.classList.add('added');
+        setTimeout(() => {
+          target.textContent = original;
+          target.classList.remove('added');
+        }, 1100);
+      } else {
+        showToast('This item is currently out of stock.');
+      }
+    }
   });
 }
 
 /* --------------------------------------------------------------------------
-   6. CART (localStorage backed)
+   6. PRODUCT DETAIL MODAL
    -------------------------------------------------------------------------- */
+function openProductModal(id) {
+  const product = findProduct(id);
+  if (!product) return;
+
+  state.modalProduct = product;
+  state.modalSelectedImage = product.image;
+  state.modalSelectedSize = null;
+  state.modalQty = 1;
+
+  dom.modalContent.innerHTML = modalTemplate(product);
+  bindModalEvents(product);
+
+  dom.modalOverlay.classList.add('show');
+  dom.productModal.classList.add('open');
+  dom.productModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProductModal() {
+  dom.modalOverlay.classList.remove('show');
+  dom.productModal.classList.remove('open');
+  dom.productModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  state.modalProduct = null;
+}
+
+function modalTemplate(p) {
+  const onSale = typeof p.compareAtPrice === 'number' && p.compareAtPrice > p.price;
+  const hasSizes = Array.isArray(p.sizes) && p.sizes.length > 0;
+  const available = isProductAvailable(p);
+  const badges = Array.isArray(p.badges) ? p.badges : [];
+  const specs = Array.isArray(p.specifications) ? p.specifications : [];
+  const thumbs = [p.image, ...(Array.isArray(p.gallery) ? p.gallery : [])];
+
+  return `
+    <div class="modal-gallery">
+      <div class="modal-main-image">
+        <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" id="modalMainImage">
+        ${onSale ? '<span class="card-badge">Sale</span>' : ''}
+      </div>
+      ${
+        thumbs.length > 1
+          ? `<div class="modal-thumbs" id="modalThumbs">
+              ${thumbs
+                .map(
+                  (src, i) => `
+                <button class="modal-thumb ${i === 0 ? 'active' : ''}" data-src="${escapeHtml(src)}">
+                  <img src="${escapeHtml(src)}" alt="${escapeHtml(p.name)} view ${i + 1}">
+                </button>`
+                )
+                .join('')}
+            </div>`
+          : ''
+      }
+    </div>
+
+    <div class="modal-details">
+      <span class="card-brand">${escapeHtml(p.brand)}</span>
+      <h2 class="modal-title">${escapeHtml(p.name)}</h2>
+
+      ${badges.length ? `<div class="badge-row static">${badges.map((b) => `<span class="badge-pill">${escapeHtml(b)}</span>`).join('')}</div>` : ''}
+
+      <div class="card-rating">
+        <span class="stars" aria-hidden="true">${renderStars(p.averageRating)}</span>
+        <span class="rating-count">${(Number(p.averageRating) || 0).toFixed(1)} · ${Number(p.reviewCount) || 0} reviews</span>
+      </div>
+
+      <div class="modal-price-row">
+        <span class="modal-price">${formatPrice(p.price)}</span>
+        ${onSale ? `<span class="card-price-old">${formatPrice(p.compareAtPrice)}</span>` : ''}
+      </div>
+
+      <p class="modal-short-desc">${escapeHtml(p.shortDescription || '')}</p>
+
+      ${
+        hasSizes
+          ? `<div class="size-select" id="sizeSelect">
+              <span class="size-select-label">Select a size</span>
+              <div class="size-grid" id="sizeGrid">
+                ${p.sizes
+                  .map(
+                    (s) => `
+                  <button
+                    class="size-btn ${s.stockStatus !== 'In Stock' ? 'unavailable' : ''}"
+                    data-size="${escapeHtml(s.size)}"
+                    ${s.stockStatus !== 'In Stock' ? 'disabled' : ''}
+                    aria-label="Size ${escapeHtml(s.size)}${s.stockStatus !== 'In Stock' ? ', out of stock' : ''}"
+                  >${escapeHtml(s.size)}</button>`
+                  )
+                  .join('')}
+              </div>
+              <p class="size-error" id="sizeError" hidden>Please select a size before adding to cart.</p>
+            </div>`
+          : ''
+      }
+
+      <div class="qty-select">
+        <span class="qty-select-label">Quantity</span>
+        <div class="qty-stepper">
+          <button class="qty-btn" id="modalQtyDec" type="button" aria-label="Decrease quantity">−</button>
+          <span class="qty-value" id="modalQtyValue">1</span>
+          <button class="qty-btn" id="modalQtyInc" type="button" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="modalAddToCart" ${!available ? 'disabled' : ''}>
+        ${available ? 'Add to Cart' : 'Out of Stock'}
+      </button>
+
+      ${
+        specs.length
+          ? `<div class="modal-specs">
+              <h3>Specifications</h3>
+              <dl class="spec-list">
+                ${specs
+                  .map(
+                    (s) => `
+                  <div class="spec-row">
+                    <dt>${escapeHtml(s.label)}</dt>
+                    <dd>${escapeHtml(s.value)}</dd>
+                  </div>`
+                  )
+                  .join('')}
+              </dl>
+            </div>`
+          : ''
+      }
+
+      ${
+        p.description
+          ? `<div class="modal-description">
+              <h3>Product Details</h3>
+              ${renderMarkdownLite(p.description)}
+            </div>`
+          : ''
+      }
+    </div>
+  `;
+}
+
+function bindModalEvents(product) {
+  // Gallery: clicking a thumbnail swaps the main image, no full re-render.
+  const thumbs = document.getElementById('modalThumbs');
+  if (thumbs) {
+    thumbs.querySelectorAll('.modal-thumb').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const src = btn.dataset.src;
+        state.modalSelectedImage = src;
+        document.getElementById('modalMainImage').src = src;
+        thumbs.querySelector('.modal-thumb.active')?.classList.remove('active');
+        btn.classList.add('active');
+      });
+    });
+  }
+
+  // Sizes: clicking selects a size (disabled/out-of-stock sizes can't be clicked).
+  const sizeGrid = document.getElementById('sizeGrid');
+  if (sizeGrid) {
+    sizeGrid.querySelectorAll('.size-btn:not(:disabled)').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        state.modalSelectedSize = btn.dataset.size;
+        sizeGrid.querySelector('.size-btn.selected')?.classList.remove('selected');
+        btn.classList.add('selected');
+        document.getElementById('sizeError').hidden = true;
+      });
+    });
+  }
+
+  // Quantity stepper
+  const qtyValueEl = document.getElementById('modalQtyValue');
+  document.getElementById('modalQtyDec')?.addEventListener('click', () => {
+    state.modalQty = Math.max(1, state.modalQty - 1);
+    qtyValueEl.textContent = state.modalQty;
+  });
+  document.getElementById('modalQtyInc')?.addEventListener('click', () => {
+    state.modalQty = Math.min(99, state.modalQty + 1);
+    qtyValueEl.textContent = state.modalQty;
+  });
+
+  // Add to cart
+  document.getElementById('modalAddToCart')?.addEventListener('click', () => {
+    const hasSizes = Array.isArray(product.sizes) && product.sizes.length > 0;
+
+    if (hasSizes && !state.modalSelectedSize) {
+      const errorEl = document.getElementById('sizeError');
+      if (errorEl) errorEl.hidden = false;
+      return;
+    }
+
+    const result = addToCart(product.id, state.modalSelectedSize, state.modalQty);
+    if (result.ok) {
+      showToast(`تمت إضافة "${product.name}" إلى السلة`);
+      closeProductModal();
+      openCart();
+    } else if (result.reason === 'out-of-stock') {
+      showToast('This item is currently out of stock.');
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   7. CART (localStorage backed, size-aware line items)
+   -------------------------------------------------------------------------- */
+function cartKey(id, size) {
+  return `${id}::${size || 'none'}`;
+}
+
 function loadCart() {
   try {
     const raw = localStorage.getItem(CONFIG.CART_STORAGE_KEY);
@@ -257,36 +505,57 @@ function findProduct(id) {
   return state.products.find((p) => p.id === id);
 }
 
-function addToCart(id) {
+/**
+ * Adds a product (optionally with a chosen size) to the cart.
+ * Returns { ok: true } on success, or { ok: false, reason } on failure so
+ * callers can decide how/where to surface the error (inline vs. toast).
+ */
+function addToCart(id, size, qty) {
   const product = findProduct(id);
-  if (!product || !product.inStock) return;
+  if (!product) return { ok: false, reason: 'not-found' };
 
-  const existing = state.cart.find((item) => item.id === id);
-  if (existing) {
-    existing.qty += 1;
-  } else {
-    state.cart.push({ id, qty: 1 });
+  const sizes = Array.isArray(product.sizes) ? product.sizes : [];
+
+  if (sizes.length > 0) {
+    if (!size) return { ok: false, reason: 'size-required' };
+    const sizeEntry = sizes.find((s) => s.size === size);
+    if (!sizeEntry || sizeEntry.stockStatus !== 'In Stock') {
+      return { ok: false, reason: 'out-of-stock' };
+    }
+  } else if (product.inStock === false) {
+    return { ok: false, reason: 'out-of-stock' };
   }
+
+  const key = cartKey(id, size);
+  const existing = state.cart.find((item) => cartKey(item.id, item.size) === key);
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    state.cart.push({ id, size: size || null, qty });
+  }
+
   saveCart();
   renderCart();
   updateCartBadge();
-  showToast(`تمت إضافة "${product.name}" إلى السلة`);
+  return { ok: true };
 }
 
-function changeQty(id, delta) {
-  const item = state.cart.find((i) => i.id === id);
+function changeQty(id, size, delta) {
+  const key = cartKey(id, size);
+  const item = state.cart.find((i) => cartKey(i.id, i.size) === key);
   if (!item) return;
   item.qty += delta;
   if (item.qty <= 0) {
-    state.cart = state.cart.filter((i) => i.id !== id);
+    state.cart = state.cart.filter((i) => cartKey(i.id, i.size) !== key);
   }
   saveCart();
   renderCart();
   updateCartBadge();
 }
 
-function removeFromCart(id) {
-  state.cart = state.cart.filter((i) => i.id !== id);
+function removeFromCart(id, size) {
+  const key = cartKey(id, size);
+  state.cart = state.cart.filter((i) => cartKey(i.id, i.size) !== key);
   saveCart();
   renderCart();
   updateCartBadge();
@@ -322,40 +591,43 @@ function renderCart() {
     dom.cartEmpty.classList.remove('show');
     dom.checkoutBtn.disabled = false;
     dom.cartItems.innerHTML = items
-      .map(
-        ({ item, product }) => `
-      <div class="cart-item" data-id="${escapeHtml(product.id)}">
+      .map(({ item, product }) => {
+        const idAttr = escapeHtml(item.id);
+        const sizeAttr = escapeHtml(item.size || '');
+        return `
+      <div class="cart-item">
         <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}">
         <div>
           <p class="cart-item-name">${escapeHtml(product.name)}</p>
+          ${item.size ? `<span class="cart-item-size">المقاس: ${escapeHtml(item.size)}</span>` : ''}
           <span class="cart-item-price">${formatPrice(product.price)}</span>
           <div class="cart-item-qty">
-            <button class="qty-btn" data-action="dec" data-id="${escapeHtml(product.id)}">−</button>
+            <button class="qty-btn" data-action="dec" data-id="${idAttr}" data-size="${sizeAttr}">−</button>
             <span class="qty-value">${item.qty}</span>
-            <button class="qty-btn" data-action="inc" data-id="${escapeHtml(product.id)}">+</button>
+            <button class="qty-btn" data-action="inc" data-id="${idAttr}" data-size="${sizeAttr}">+</button>
           </div>
         </div>
-        <button class="cart-item-remove" data-action="remove" data-id="${escapeHtml(product.id)}">إزالة</button>
-      </div>`
-      )
+        <button class="cart-item-remove" data-action="remove" data-id="${idAttr}" data-size="${sizeAttr}">إزالة</button>
+      </div>`;
+      })
       .join('');
   }
 
   dom.cartTotal.textContent = formatPrice(cartTotal());
 
   dom.cartItems.querySelectorAll('[data-action="inc"]').forEach((b) =>
-    b.addEventListener('click', () => changeQty(b.dataset.id, 1))
+    b.addEventListener('click', () => changeQty(b.dataset.id, b.dataset.size || null, 1))
   );
   dom.cartItems.querySelectorAll('[data-action="dec"]').forEach((b) =>
-    b.addEventListener('click', () => changeQty(b.dataset.id, -1))
+    b.addEventListener('click', () => changeQty(b.dataset.id, b.dataset.size || null, -1))
   );
   dom.cartItems.querySelectorAll('[data-action="remove"]').forEach((b) =>
-    b.addEventListener('click', () => removeFromCart(b.dataset.id))
+    b.addEventListener('click', () => removeFromCart(b.dataset.id, b.dataset.size || null))
   );
 }
 
 /* --------------------------------------------------------------------------
-   7. CART PANEL UI
+   8. CART PANEL UI
    -------------------------------------------------------------------------- */
 function openCart() {
   dom.cartPanel.classList.add('open');
@@ -371,7 +643,7 @@ function closeCart() {
 }
 
 /* --------------------------------------------------------------------------
-   8. CHECKOUT -> TELEGRAM
+   9. CHECKOUT -> TELEGRAM
    -------------------------------------------------------------------------- */
 function showCheckoutForm() {
   document.getElementById('cartBody').hidden = true;
@@ -410,7 +682,8 @@ function buildOrderMessage() {
     .map((item) => {
       const p = findProduct(item.id);
       if (!p) return null;
-      return `• ${p.name} × ${item.qty} — ${formatPrice(p.price * item.qty)}`;
+      const sizeLabel = item.size ? ` (Size: ${item.size})` : '';
+      return `• ${p.name}${sizeLabel} × ${item.qty} — ${formatPrice(p.price * item.qty)}`;
     })
     .filter(Boolean)
     .join('\n');
@@ -503,11 +776,11 @@ function setSubmitting(isSubmitting) {
 }
 
 /* --------------------------------------------------------------------------
-   9. UTILITIES
+   10. UTILITIES
    -------------------------------------------------------------------------- */
 function formatPrice(amount) {
   const n = Number(amount) || 0;
-  return `${n.toLocaleString('en-US')} ${CONFIG.CURRENCY}`;
+  return `${CONFIG.CURRENCY}${n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 function escapeHtml(str) {
@@ -535,10 +808,96 @@ function showToast(msg) {
   showToast._t = setTimeout(() => dom.toast.classList.remove('show'), 2400);
 }
 
+// Renders a fixed 5-star row, filling stars up to the nearest whole number.
+// (A simplified alternative to half-star precision — swap in an SVG-based
+// renderer later if you want fractional stars.)
+function renderStars(rating) {
+  const rounded = Math.round(Number(rating) || 0);
+  let html = '';
+  for (let i = 1; i <= 5; i++) {
+    html += `<span class="star ${i <= rounded ? 'filled' : ''}">★</span>`;
+  }
+  return html;
+}
+
+// A deliberately small, dependency-free Markdown subset renderer.
+// Supports: **bold**, *italic*, [text](url) links, "- " bullet lists,
+// "1. " numbered lists, and paragraphs (blank-line OR list-boundary separated).
+// The source text is HTML-escaped BEFORE any tags are added, so this is
+// safe to use even if the CMS content ever contains stray angle brackets.
+//
+// Deliberately line-based rather than blank-line-block-based: CMS authors
+// very often type a lead-in line directly above a list with no blank line
+// in between (e.g. "Highlights:" followed immediately by "- Feature one"),
+// and that lead-in line still needs to render as its own paragraph rather
+// than getting swallowed into a non-list block.
+function renderMarkdownLite(raw) {
+  if (!raw) return '';
+  const lines = escapeHtml(raw).split('\n');
+
+  const htmlBlocks = [];
+  let paragraphLines = [];
+
+  function flushParagraph() {
+    if (paragraphLines.length > 0) {
+      htmlBlocks.push(`<p>${inlineMarkdown(paragraphLines.join('<br>'))}</p>`);
+      paragraphLines = [];
+    }
+  }
+
+  let i = 0;
+  while (i < lines.length) {
+    const trimmed = lines[i].trim();
+
+    if (trimmed === '') {
+      flushParagraph();
+      i++;
+      continue;
+    }
+
+    if (/^-\s+/.test(trimmed)) {
+      flushParagraph();
+      const items = [];
+      while (i < lines.length && /^-\s+/.test(lines[i].trim())) {
+        items.push(`<li>${inlineMarkdown(lines[i].trim().replace(/^-\s+/, ''))}</li>`);
+        i++;
+      }
+      htmlBlocks.push(`<ul>${items.join('')}</ul>`);
+      continue;
+    }
+
+    if (/^\d+\.\s+/.test(trimmed)) {
+      flushParagraph();
+      const items = [];
+      while (i < lines.length && /^\d+\.\s+/.test(lines[i].trim())) {
+        items.push(`<li>${inlineMarkdown(lines[i].trim().replace(/^\d+\.\s+/, ''))}</li>`);
+        i++;
+      }
+      htmlBlocks.push(`<ol>${items.join('')}</ol>`);
+      continue;
+    }
+
+    paragraphLines.push(trimmed);
+    i++;
+  }
+  flushParagraph();
+
+  return htmlBlocks.join('');
+}
+
+function inlineMarkdown(text) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+}
+
 /* --------------------------------------------------------------------------
    STATIC EVENT BINDINGS
    -------------------------------------------------------------------------- */
 function bindStaticEvents() {
+  bindProductGridEvents();
+
   dom.searchInput.addEventListener('input', handleSearchInput);
   dom.searchClear.addEventListener('click', () => {
     dom.searchInput.value = '';
@@ -551,8 +910,15 @@ function bindStaticEvents() {
     state.searchTerm = '';
     dom.searchClear.hidden = true;
     state.activeCategory = 'all';
+    state.activeGender = 'all';
+    dom.genderFilter.value = 'all';
     dom.categoryChips.querySelector('.chip.active')?.classList.remove('active');
     dom.categoryChips.querySelector('[data-category="all"]')?.classList.add('active');
+    applyFilters();
+  });
+
+  dom.genderFilter.addEventListener('change', () => {
+    state.activeGender = dom.genderFilter.value;
     applyFilters();
   });
 
@@ -561,8 +927,16 @@ function bindStaticEvents() {
   dom.cartOverlay.addEventListener('click', closeCart);
   dom.cartEmptyShop.addEventListener('click', closeCart);
 
+  dom.modalOverlay.addEventListener('click', closeProductModal);
+  dom.modalClose.addEventListener('click', closeProductModal);
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeCart();
+    if (e.key !== 'Escape') return;
+    if (dom.productModal.classList.contains('open')) {
+      closeProductModal();
+    } else {
+      closeCart();
+    }
   });
 
   dom.checkoutBtn.addEventListener('click', showCheckoutForm);
