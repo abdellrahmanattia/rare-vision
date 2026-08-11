@@ -1,158 +1,102 @@
-[
-  {
-    "id": "rv-001",
-    "name": "Air Pulse '07 أبيض ثلجي",
-    "brand": "Nike",
-    "category": "nike",
-    "categoryLabel": "نايك",
-    "price": 2350,
-    "oldPrice": 2600,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=Air+Pulse+%2707",
-    "isNew": false,
-    "inStock": true,
-    "description": "سنيكر يومي كلاسيكي بجلد طبيعي ولون أبيض نقي يناسب أي إطلالة."
-  },
-  {
-    "id": "rv-002",
-    "name": "Dunk Retro طبعة الحمامة السوداء",
-    "brand": "Nike SB",
-    "category": "nike",
-    "categoryLabel": "نايك",
-    "price": 2680,
-    "oldPrice": 2950,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=Dunk+Retro",
-    "isNew": true,
-    "inStock": true,
-    "description": "إصدار محدود بتفاصيل مطرزة وتصميم يجمع بين الجرأة والبساطة."
-  },
-  {
-    "id": "rv-003",
-    "name": "Campus 00s رمادي كلاسيك",
-    "brand": "Adidas",
-    "category": "adidas",
-    "categoryLabel": "أديداس",
-    "price": 2150,
-    "oldPrice": null,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=Campus+00s",
-    "isNew": false,
-    "inStock": true,
-    "description": "قماش سويدي فاخر وقاعدة مطاطية مريحة لاستخدام يومي طويل."
-  },
-  {
-    "id": "rv-004",
-    "name": "Samba OG أبيض × أسود",
-    "brand": "Adidas",
-    "category": "adidas",
-    "categoryLabel": "أديداس",
-    "price": 2250,
-    "oldPrice": 2500,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=Samba+OG",
-    "isNew": false,
-    "inStock": true,
-    "description": "الموديل الأيقوني اللي رجع بقوة، مناسب لكل الأنماط."
-  },
-  {
-    "id": "rv-005",
-    "name": "Air Jordan 1 High \"Rebel\"",
-    "brand": "Jordan",
-    "category": "jordan",
-    "categoryLabel": "جوردان",
-    "price": 2900,
-    "oldPrice": 3200,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=Air+Jordan+1",
-    "isNew": true,
-    "inStock": true,
-    "description": "قطعة أساسية لكل محب لكرة السلة والستريتوير الأصيل."
-  },
-  {
-    "id": "rv-006",
-    "name": "Air Jordan 4 \"Black Cat\"",
-    "brand": "Jordan",
-    "category": "jordan",
-    "categoryLabel": "جوردان",
-    "price": 3100,
-    "oldPrice": null,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=Air+Jordan+4",
-    "isNew": false,
-    "inStock": false,
-    "description": "تصميم أسود بالكامل بلمسة عصرية، من أكثر الموديلات طلباً."
-  },
-  {
-    "id": "rv-007",
-    "name": "990v6 رمادي هادئ",
-    "brand": "New Balance",
-    "category": "newbalance",
-    "categoryLabel": "نيو بالانس",
-    "price": 3050,
-    "oldPrice": 3300,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=990v6",
-    "isNew": false,
-    "inStock": true,
-    "description": "راحة استثنائية مع طابع كلاسيكي أنيق يناسب كل الأعمار."
-  },
-  {
-    "id": "rv-008",
-    "name": "9060 \"Moonrock\"",
-    "brand": "New Balance",
-    "category": "newbalance",
-    "categoryLabel": "نيو بالانس",
-    "price": 2750,
-    "oldPrice": 2950,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=9060+Moonrock",
-    "isNew": true,
-    "inStock": true,
-    "description": "ألوان ترابية هادئة وتفاصيل ديناميكية تجمع الماضي بالحاضر."
-  },
-  {
-    "id": "rv-009",
-    "name": "هودي أوفرسايز أسود",
-    "brand": "Rare Vision",
-    "category": "streetwear",
-    "categoryLabel": "ستريت وير",
-    "price": 890,
-    "oldPrice": 1050,
-    "image": "https://placehold.co/600x600/17171b/c9a227?text=Oversized+Hoodie",
-    "isNew": true,
-    "inStock": true,
-    "description": "قماش قطن ثقيل، قصة أوفرسايز مريحة، وطبعة شعار مطاطية."
-  },
-  {
-    "id": "rv-010",
-    "name": "كاب كلاسيك مطرز",
-    "brand": "Rare Vision",
-    "category": "streetwear",
-    "categoryLabel": "ستريت وير",
-    "price": 420,
-    "oldPrice": null,
-    "image": "https://placehold.co/600x600/17171b/c9a227?text=Classic+Cap",
-    "isNew": false,
-    "inStock": true,
-    "description": "إكسسوار يكمل أي إطلالة ستريتوير بسهولة."
-  },
-  {
-    "id": "rv-011",
-    "name": "Knu Skool أبيض قماش",
-    "brand": "Vans",
-    "category": "vans",
-    "categoryLabel": "فانس",
-    "price": 2100,
-    "oldPrice": 2350,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=Knu+Skool",
-    "isNew": false,
-    "inStock": true,
-    "description": "تصميم مبطن مستوحى من التسعينات مع راحة يومية عالية."
-  },
-  {
-    "id": "rv-012",
-    "name": "Gel-Kayano 14 كريمي",
-    "brand": "Asics",
-    "category": "asics",
-    "categoryLabel": "أسيكس",
-    "price": 2600,
-    "oldPrice": 2900,
-    "image": "https://placehold.co/600x600/17171b/e8c158?text=Gel-Kayano+14",
-    "isNew": true,
-    "inStock": false,
-    "description": "طابع رياضي تقني بتفاصيل ألوان هادئة تناسب كل الإطلالات."
-  }
-]
+{
+  "products": [
+    {
+      "id": "nova-runner-sneaker",
+      "name": "Nova Runner Sneaker",
+      "gender": "Unisex",
+      "productType": "Sneakers",
+      "brand": "Nova Athletics",
+      "sku": "RV-SNK-1024",
+      "price": 129.99,
+      "compareAtPrice": 179.99,
+      "shortDescription": "Lightweight everyday trainer with responsive cushioning.",
+      "description": "The **Nova Runner** is built for miles on the street and hours on your feet. A knit engineered mesh upper flexes with your stride, while a full-length EVA midsole keeps every step light.\n\nWhy you'll like it:\n- Breathable mesh upper keeps feet cool in warm weather\n- Rebounding EVA foam reduces fatigue on long days\n- Rubber outsole with multi-directional traction\n- Reflective pull tab for low-light visibility\n\nTrue to size for most feet. If you have a wider foot, we recommend sizing up half a size.",
+      "image": "https://placehold.co/800x800/17171b/e8c158?text=Nova+Runner",
+      "gallery": [
+        "https://placehold.co/800x800/1f1f24/e8c158?text=Side+Profile",
+        "https://placehold.co/800x800/1f1f24/e8c158?text=Sole+Detail",
+        "https://placehold.co/800x800/1f1f24/e8c158?text=Heel+View"
+      ],
+      "specifications": [
+        { "label": "Upper Material", "value": "Engineered knit mesh" },
+        { "label": "Midsole", "value": "Full-length EVA foam" },
+        { "label": "Outsole", "value": "Rubber, multi-directional tread" },
+        { "label": "Closure", "value": "Lace-up" },
+        { "label": "Weight", "value": "9.8 oz (size 9, single shoe)" }
+      ],
+      "badges": ["Best Seller", "New Arrival"],
+      "averageRating": 4.7,
+      "reviewCount": 328,
+      "sizes": [
+        { "size": "7", "stockStatus": "In Stock" },
+        { "size": "8", "stockStatus": "In Stock" },
+        { "size": "9", "stockStatus": "Out of Stock" },
+        { "size": "10", "stockStatus": "In Stock" },
+        { "size": "11", "stockStatus": "Out of Stock" },
+        { "size": "12", "stockStatus": "In Stock" }
+      ],
+      "inStock": true
+    },
+    {
+      "id": "summit-shell-jacket",
+      "name": "Summit Shell Winter Jacket",
+      "gender": "Men",
+      "productType": "Jackets",
+      "brand": "Northline Supply Co.",
+      "sku": "RV-JKT-2051",
+      "price": 214.00,
+      "compareAtPrice": null,
+      "shortDescription": "Insulated waterproof shell built for sub-zero commutes.",
+      "description": "Face down the coldest mornings in the **Summit Shell**. A fully seam-sealed waterproof exterior locks out wind and snow, while responsibly-sourced down insulation traps warmth without the bulk.\n\nKey features:\n- 3-layer waterproof, windproof shell fabric\n- 600-fill down insulation, ethically sourced\n- Adjustable storm hood and cuffs\n- Interior zip pocket for essentials\n\nLayers well over a mid-weight sweater. Runs true to size.",
+      "image": "https://placehold.co/800x800/17171b/e8c158?text=Summit+Shell",
+      "gallery": [
+        "https://placehold.co/800x800/1f1f24/e8c158?text=Front+Zipped",
+        "https://placehold.co/800x800/1f1f24/e8c158?text=Hood+Detail",
+        "https://placehold.co/800x800/1f1f24/e8c158?text=Back+View"
+      ],
+      "specifications": [
+        { "label": "Shell Material", "value": "3-layer waterproof nylon" },
+        { "label": "Insulation", "value": "600-fill responsibly sourced down" },
+        { "label": "Fit", "value": "Regular, true to size" },
+        { "label": "Care", "value": "Machine wash cold, hang to dry" }
+      ],
+      "badges": ["Limited Edition"],
+      "averageRating": 4.5,
+      "reviewCount": 94,
+      "sizes": [
+        { "size": "S", "stockStatus": "Out of Stock" },
+        { "size": "M", "stockStatus": "In Stock" },
+        { "size": "L", "stockStatus": "In Stock" },
+        { "size": "XL", "stockStatus": "In Stock" }
+      ],
+      "inStock": true
+    },
+    {
+      "id": "aurum-chrono-watch",
+      "name": "Aurum Automatic Chronograph",
+      "gender": "Men",
+      "productType": "Watches",
+      "brand": "Verrado & Sons",
+      "sku": "RV-WCH-3399",
+      "price": 1450.00,
+      "shortDescription": "Swiss-made automatic chronograph with a sapphire crystal.",
+      "description": "Precision meets restraint in the **Aurum Chronograph**. A Swiss automatic movement drives the hands with no battery required, visible through an exhibition case back.\n\nHighlights:\n- Self-winding Swiss automatic movement\n- Scratch-resistant sapphire crystal\n- Screw-down crown, rated to 100m water resistance\n- Genuine leather strap with signed buckle\n\nEach piece ships in a signature Rare Vision presentation box with a two-year warranty card.",
+      "image": "https://placehold.co/800x800/17171b/c9a227?text=Aurum+Chrono",
+      "gallery": [
+        "https://placehold.co/800x800/1f1f24/c9a227?text=Dial+Close-up",
+        "https://placehold.co/800x800/1f1f24/c9a227?text=Case+Back",
+        "https://placehold.co/800x800/1f1f24/c9a227?text=On+Wrist"
+      ],
+      "specifications": [
+        { "label": "Movement", "value": "Swiss automatic, 42-hour power reserve" },
+        { "label": "Case", "value": "41mm brushed stainless steel" },
+        { "label": "Water Resistance", "value": "100m / 10 ATM" },
+        { "label": "Crystal", "value": "Scratch-resistant sapphire" }
+      ],
+      "badges": ["Limited Edition"],
+      "averageRating": 4.9,
+      "reviewCount": 41,
+      "inStock": true
+    }
+  ]
+}
