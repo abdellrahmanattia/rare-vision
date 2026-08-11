@@ -1,102 +1,212 @@
 {
   "products": [
     {
-      "id": "nova-runner-sneaker",
-      "name": "Nova Runner Sneaker",
-      "gender": "Unisex",
-      "productType": "Sneakers",
-      "brand": "Nova Athletics",
-      "sku": "RV-SNK-1024",
-      "price": 129.99,
-      "compareAtPrice": 179.99,
       "shortDescription": "Lightweight everyday trainer with responsive cushioning.",
-      "description": "The **Nova Runner** is built for miles on the street and hours on your feet. A knit engineered mesh upper flexes with your stride, while a full-length EVA midsole keeps every step light.\n\nWhy you'll like it:\n- Breathable mesh upper keeps feet cool in warm weather\n- Rebounding EVA foam reduces fatigue on long days\n- Rubber outsole with multi-directional traction\n- Reflective pull tab for low-light visibility\n\nTrue to size for most feet. If you have a wider foot, we recommend sizing up half a size.",
-      "image": "https://placehold.co/800x800/17171b/e8c158?text=Nova+Runner",
+      "gender": "Unisex",
+      "brand": "Nova Athletics",
+      "productType": "Sneakers",
+      "price": 129.99,
+      "name": "Nova Runner Sneaker",
+      "badges": [
+        "Best Seller",
+        "New Arrival"
+      ],
+      "specifications": [
+        {
+          "label": "Upper Material",
+          "value": "Engineered knit mesh"
+        },
+        {
+          "label": "Midsole",
+          "value": "Full-length EVA foam"
+        },
+        {
+          "label": "Outsole",
+          "value": "Rubber, multi-directional tread"
+        },
+        {
+          "label": "Closure",
+          "value": "Lace-up"
+        },
+        {
+          "label": "Weight",
+          "value": "9.8 oz (size 9, single shoe)"
+        }
+      ],
+      "compareAtPrice": 179.99,
+      "inStock": true,
+      "sizes": [
+        {
+          "size": "7",
+          "stockStatus": "In Stock"
+        },
+        {
+          "size": "8",
+          "stockStatus": "In Stock"
+        },
+        {
+          "size": "9",
+          "stockStatus": "Out of Stock"
+        },
+        {
+          "size": "10",
+          "stockStatus": "In Stock"
+        },
+        {
+          "size": "11",
+          "stockStatus": "Out of Stock"
+        },
+        {
+          "size": "12",
+          "stockStatus": "In Stock"
+        }
+      ],
       "gallery": [
         "https://placehold.co/800x800/1f1f24/e8c158?text=Side+Profile",
         "https://placehold.co/800x800/1f1f24/e8c158?text=Sole+Detail",
         "https://placehold.co/800x800/1f1f24/e8c158?text=Heel+View"
       ],
-      "specifications": [
-        { "label": "Upper Material", "value": "Engineered knit mesh" },
-        { "label": "Midsole", "value": "Full-length EVA foam" },
-        { "label": "Outsole", "value": "Rubber, multi-directional tread" },
-        { "label": "Closure", "value": "Lace-up" },
-        { "label": "Weight", "value": "9.8 oz (size 9, single shoe)" }
-      ],
-      "badges": ["Best Seller", "New Arrival"],
-      "averageRating": 4.7,
       "reviewCount": 328,
-      "sizes": [
-        { "size": "7", "stockStatus": "In Stock" },
-        { "size": "8", "stockStatus": "In Stock" },
-        { "size": "9", "stockStatus": "Out of Stock" },
-        { "size": "10", "stockStatus": "In Stock" },
-        { "size": "11", "stockStatus": "Out of Stock" },
-        { "size": "12", "stockStatus": "In Stock" }
-      ],
-      "inStock": true
+      "averageRating": 4.7,
+      "id": "nova-runner-sneaker",
+      "image": "https://placehold.co/800x800/17171b/e8c158?text=Nova+Runner",
+      "description": "The **Nova Runner** is built for miles on the street and hours on your feet. A knit engineered mesh upper flexes with your stride, while a full-length EVA midsole keeps every step light.\n\nWhy you'll like it:\n- Breathable mesh upper keeps feet cool in warm weather\n- Rebounding EVA foam reduces fatigue on long days\n- Rubber outsole with multi-directional traction\n- Reflective pull tab for low-light visibility\n\nTrue to size for most feet. If you have a wider foot, we recommend sizing up half a size.",
+      "sku": "RV-SNK-1024"
     },
     {
-      "id": "summit-shell-jacket",
-      "name": "Summit Shell Winter Jacket",
-      "gender": "Men",
-      "productType": "Jackets",
-      "brand": "Northline Supply Co.",
-      "sku": "RV-JKT-2051",
-      "price": 214.00,
-      "compareAtPrice": null,
       "shortDescription": "Insulated waterproof shell built for sub-zero commutes.",
-      "description": "Face down the coldest mornings in the **Summit Shell**. A fully seam-sealed waterproof exterior locks out wind and snow, while responsibly-sourced down insulation traps warmth without the bulk.\n\nKey features:\n- 3-layer waterproof, windproof shell fabric\n- 600-fill down insulation, ethically sourced\n- Adjustable storm hood and cuffs\n- Interior zip pocket for essentials\n\nLayers well over a mid-weight sweater. Runs true to size.",
-      "image": "https://placehold.co/800x800/17171b/e8c158?text=Summit+Shell",
+      "gender": "Men",
+      "brand": "Northline Supply Co.",
+      "productType": "Jackets",
+      "price": 214,
+      "name": "Summit Shell Winter Jacket",
+      "badges": [
+        "Limited Edition"
+      ],
+      "specifications": [
+        {
+          "label": "Shell Material",
+          "value": "3-layer waterproof nylon"
+        },
+        {
+          "label": "Insulation",
+          "value": "600-fill responsibly sourced down"
+        },
+        {
+          "label": "Fit",
+          "value": "Regular, true to size"
+        },
+        {
+          "label": "Care",
+          "value": "Machine wash cold, hang to dry"
+        }
+      ],
+      "compareAtPrice": null,
+      "inStock": true,
+      "sizes": [
+        {
+          "size": "S",
+          "stockStatus": "Out of Stock"
+        },
+        {
+          "size": "M",
+          "stockStatus": "In Stock"
+        },
+        {
+          "size": "L",
+          "stockStatus": "In Stock"
+        },
+        {
+          "size": "XL",
+          "stockStatus": "In Stock"
+        }
+      ],
       "gallery": [
         "https://placehold.co/800x800/1f1f24/e8c158?text=Front+Zipped",
         "https://placehold.co/800x800/1f1f24/e8c158?text=Hood+Detail",
         "https://placehold.co/800x800/1f1f24/e8c158?text=Back+View"
       ],
-      "specifications": [
-        { "label": "Shell Material", "value": "3-layer waterproof nylon" },
-        { "label": "Insulation", "value": "600-fill responsibly sourced down" },
-        { "label": "Fit", "value": "Regular, true to size" },
-        { "label": "Care", "value": "Machine wash cold, hang to dry" }
-      ],
-      "badges": ["Limited Edition"],
-      "averageRating": 4.5,
       "reviewCount": 94,
-      "sizes": [
-        { "size": "S", "stockStatus": "Out of Stock" },
-        { "size": "M", "stockStatus": "In Stock" },
-        { "size": "L", "stockStatus": "In Stock" },
-        { "size": "XL", "stockStatus": "In Stock" }
-      ],
-      "inStock": true
+      "averageRating": 4.5,
+      "id": "summit-shell-jacket",
+      "image": "https://placehold.co/800x800/17171b/e8c158?text=Summit+Shell",
+      "description": "Face down the coldest mornings in the **Summit Shell**. A fully seam-sealed waterproof exterior locks out wind and snow, while responsibly-sourced down insulation traps warmth without the bulk.\n\nKey features:\n- 3-layer waterproof, windproof shell fabric\n- 600-fill down insulation, ethically sourced\n- Adjustable storm hood and cuffs\n- Interior zip pocket for essentials\n\nLayers well over a mid-weight sweater. Runs true to size.",
+      "sku": "RV-JKT-2051"
     },
     {
-      "id": "aurum-chrono-watch",
-      "name": "Aurum Automatic Chronograph",
-      "gender": "Men",
-      "productType": "Watches",
-      "brand": "Verrado & Sons",
-      "sku": "RV-WCH-3399",
-      "price": 1450.00,
       "shortDescription": "Swiss-made automatic chronograph with a sapphire crystal.",
-      "description": "Precision meets restraint in the **Aurum Chronograph**. A Swiss automatic movement drives the hands with no battery required, visible through an exhibition case back.\n\nHighlights:\n- Self-winding Swiss automatic movement\n- Scratch-resistant sapphire crystal\n- Screw-down crown, rated to 100m water resistance\n- Genuine leather strap with signed buckle\n\nEach piece ships in a signature Rare Vision presentation box with a two-year warranty card.",
-      "image": "https://placehold.co/800x800/17171b/c9a227?text=Aurum+Chrono",
+      "gender": "Men",
+      "brand": "Verrado & Sons",
+      "productType": "Watches",
+      "price": 1450,
+      "name": "Aurum Automatic Chronograph",
+      "badges": [
+        "Limited Edition"
+      ],
+      "specifications": [
+        {
+          "label": "Movement",
+          "value": "Swiss automatic, 42-hour power reserve"
+        },
+        {
+          "label": "Case",
+          "value": "41mm brushed stainless steel"
+        },
+        {
+          "label": "Water Resistance",
+          "value": "100m / 10 ATM"
+        },
+        {
+          "label": "Crystal",
+          "value": "Scratch-resistant sapphire"
+        }
+      ],
+      "inStock": true,
       "gallery": [
         "https://placehold.co/800x800/1f1f24/c9a227?text=Dial+Close-up",
         "https://placehold.co/800x800/1f1f24/c9a227?text=Case+Back",
         "https://placehold.co/800x800/1f1f24/c9a227?text=On+Wrist"
       ],
-      "specifications": [
-        { "label": "Movement", "value": "Swiss automatic, 42-hour power reserve" },
-        { "label": "Case", "value": "41mm brushed stainless steel" },
-        { "label": "Water Resistance", "value": "100m / 10 ATM" },
-        { "label": "Crystal", "value": "Scratch-resistant sapphire" }
-      ],
-      "badges": ["Limited Edition"],
-      "averageRating": 4.9,
       "reviewCount": 41,
-      "inStock": true
+      "averageRating": 4.9,
+      "id": "aurum-chrono-watch",
+      "image": "https://placehold.co/800x800/17171b/c9a227?text=Aurum+Chrono",
+      "description": "Precision meets restraint in the **Aurum Chronograph**. A Swiss automatic movement drives the hands with no battery required, visible through an exhibition case back.\n\nHighlights:\n- Self-winding Swiss automatic movement\n- Scratch-resistant sapphire crystal\n- Screw-down crown, rated to 100m water resistance\n- Genuine leather strap with signed buckle\n\nEach piece ships in a signature Rare Vision presentation box with a two-year warranty card.",
+      "sku": "RV-WCH-3399"
+    },
+    {
+      "shortDescription": "Wonderful shoes, a distinctive brand, brown color",
+      "gender": "Unisex",
+      "brand": "Bot",
+      "productType": "Sneakers",
+      "price": 2000,
+      "name": "distinctive shoes",
+      "badges": [
+        "Best Seller"
+      ],
+      "specifications": [
+        {
+          "label": "Material, Fit, Water Resistance",
+          "value": "100% Cotton, Oversized, 100m / 10 ATM"
+        }
+      ],
+      "compareAtPrice": 2500,
+      "inStock": true,
+      "sizes": [
+        {
+          "stockStatus": "In Stock",
+          "size": "38, 39, 40, 41, 42, 43, 44"
+        }
+      ],
+      "gallery": [
+        "assets/products/images-4-.jpeg"
+      ],
+      "reviewCount": 162,
+      "averageRating": 4.7,
+      "id": "unique-product",
+      "image": "assets/products/images-4-.jpeg",
+      "description": "New product",
+      "sku": "rare-vision-1"
     }
   ]
 }
