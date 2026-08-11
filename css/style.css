@@ -342,6 +342,61 @@ input, textarea{ font: inherit; color: inherit; }
   font-weight: 700;
 }
 
+.gender-filter{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.gender-filter:hover, .gender-filter:focus-visible{ border-color: var(--gold); }
+
+/* Badge pills (Best Seller / New Arrival / Limited Edition) */
+.badge-row{
+  position: absolute;
+  top: 12px; left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+.badge-row.static{
+  position: static;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px 0 4px;
+}
+.badge-pill{
+  font-family: var(--font-latin);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(11,11,13,.75);
+  border: 1px solid var(--gold-dim);
+  color: var(--gold-bright);
+  backdrop-filter: blur(4px);
+}
+
+/* Star ratings */
+.card-rating{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+.stars{ display: inline-flex; gap: 1px; font-size: 13px; line-height: 1; }
+.star{ color: var(--border); }
+.star.filled{ color: var(--gold); }
+.rating-count{ font-family: var(--font-latin); }
+
 .results-meta{
   color: var(--text-faint);
   font-size: 13px;
@@ -621,6 +676,12 @@ input, textarea{ font: inherit; color: inherit; }
   background: var(--surface-alt);
 }
 .cart-item-name{ font-size: 14px; font-weight: 700; margin: 0 0 4px; }
+.cart-item-size{
+  display: inline-block;
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
 .cart-item-price{ font-family: var(--font-latin); font-size: 13px; color: var(--gold-bright); }
 .cart-item-qty{
   display: flex; align-items: center; gap: 8px;
@@ -763,6 +824,226 @@ input, textarea{ font: inherit; color: inherit; }
 .toast.show{ opacity: 1; transform: translate(-50%, 0); }
 
 /* ==========================================================================
+   PRODUCT DETAIL MODAL
+   ========================================================================== */
+.modal-overlay{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(3px);
+  z-index: 110;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
+}
+.modal-overlay.show{ opacity: 1; pointer-events: auto; }
+
+.product-modal{
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(.96);
+  width: min(920px, 92vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
+  z-index: 115;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .28s var(--ease), transform .28s var(--ease);
+}
+.product-modal.open{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-close{
+  position: sticky;
+  top: 16px; float: left;
+  margin: 16px 0 0 16px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(11,11,13,.7);
+  color: var(--text);
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5;
+  transition: background .2s;
+}
+.modal-close:hover{ background: var(--gold); color: #14140f; }
+
+.modal-body{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  direction: ltr; /* product detail content reads left-to-right (English) */
+  text-align: left;
+}
+
+.modal-gallery{ padding: 24px; }
+.modal-main-image{
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface-alt);
+}
+.modal-main-image img{ width: 100%; height: 100%; object-fit: cover; }
+
+.modal-thumbs{
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.modal-thumb{
+  flex-shrink: 0;
+  width: 64px; height: 64px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 2px solid var(--border);
+  opacity: .7;
+  transition: all .2s;
+}
+.modal-thumb img{ width: 100%; height: 100%; object-fit: cover; }
+.modal-thumb:hover{ opacity: 1; }
+.modal-thumb.active{ border-color: var(--gold); opacity: 1; }
+
+.modal-details{
+  padding: 24px 28px 32px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.modal-title{
+  font-size: 24px;
+  font-weight: 800;
+  margin: 2px 0 0;
+  line-height: 1.2;
+}
+.modal-price-row{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 4px;
+}
+.modal-price{
+  font-family: var(--font-latin);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+.modal-short-desc{
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Size selector */
+.size-select{ margin-top: 6px; }
+.size-select-label, .qty-select-label{
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.size-grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.size-btn{
+  min-width: 46px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: var(--font-latin);
+  font-weight: 600;
+  font-size: 14px;
+  transition: all .2s;
+}
+.size-btn:hover:not(:disabled){ border-color: var(--gold); color: var(--gold-bright); }
+.size-btn.selected{
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #14140f;
+}
+/* High-end sneaker store convention: unavailable sizes are struck through
+   rather than hidden, so shoppers can see what exists but can't buy it. */
+.size-btn.unavailable{
+  color: var(--text-faint);
+  background: transparent;
+  border-style: dashed;
+  text-decoration: line-through;
+  cursor: not-allowed;
+  opacity: .55;
+}
+.size-error{
+  color: #ff9384;
+  font-size: 12.5px;
+  margin: 8px 0 0;
+}
+
+/* Quantity stepper (modal) */
+.qty-select{ margin-top: 4px; }
+.qty-stepper{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+}
+.qty-stepper .qty-btn{
+  width: 26px; height: 26px;
+  border: none;
+  background: var(--surface-alt);
+}
+.qty-stepper .qty-value{ font-size: 14px; min-width: 20px; }
+
+/* Specifications */
+.modal-specs h3, .modal-description h3{
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+  margin: 18px 0 10px;
+  border-top: 1px solid var(--border-soft);
+  padding-top: 18px;
+}
+.spec-list{ margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.spec-row{
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  gap: 12px;
+  font-size: 13.5px;
+}
+.spec-row dt{ color: var(--text-faint); margin: 0; }
+.spec-row dd{ color: var(--text); margin: 0; }
+
+/* Rich description (rendered from CMS markdown) */
+.modal-description p{ color: var(--text-muted); font-size: 14px; line-height: 1.7; margin: 0 0 12px; }
+.modal-description ul, .modal-description ol{
+  margin: 0 0 12px;
+  padding-left: 20px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.modal-description li{ margin-bottom: 4px; }
+.modal-description strong{ color: var(--text); }
+.modal-description a{ color: var(--gold-bright); text-decoration: underline; }
+
+/* ==========================================================================
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 980px){
@@ -795,6 +1076,12 @@ input, textarea{ font: inherit; color: inherit; }
   .trust-bar{ grid-template-columns: 1fr; }
   .footer-inner{ grid-template-columns: 1fr; }
   .cart-panel{ width: 100vw; }
+
+  .gender-filter{ width: 100%; }
+  .product-modal{ width: 94vw; max-height: 92vh; }
+  .modal-body{ grid-template-columns: 1fr; }
+  .modal-details{ padding: 8px 20px 28px; }
+  .modal-gallery{ padding: 20px 20px 0; }
 }
 
 @media (max-width: 480px){
