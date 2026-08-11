@@ -22,11 +22,11 @@
    -------------------------------------------------------------------------- */
 const CONFIG = {
   // Create a bot with @BotFather on Telegram, copy the token it gives you.
-  TELEGRAM_BOT_TOKEN: 'YOUR_BOT_TOKEN_HERE',
+  TELEGRAM_BOT_TOKEN: '8628571545:AAE-aYI0nTra7T_k1WfcKNOm-bfS0CBZEmQ',
 
   // The chat ID that should RECEIVE new orders (your personal chat, or a
   // group/channel the bot has been added to). See README.md for how to find it.
-  TELEGRAM_CHAT_ID: 'YOUR_CHAT_ID_HERE',
+  TELEGRAM_CHAT_ID: '6472884024',
 
   PRODUCTS_URL: 'data/products.json',
   CURRENCY: '$',
