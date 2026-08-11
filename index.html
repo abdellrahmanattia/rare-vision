@@ -77,6 +77,14 @@
     <div class="category-chips" id="categoryChips">
       <!-- filled by JS -->
     </div>
+
+    <select class="gender-filter" id="genderFilter" aria-label="Filter by gender">
+      <option value="all">All Genders</option>
+      <option value="Men">Men</option>
+      <option value="Women">Women</option>
+      <option value="Unisex">Unisex</option>
+      <option value="Kids">Kids</option>
+    </select>
   </div>
 
   <p class="results-meta" id="resultsMeta"></p>
@@ -234,6 +242,15 @@
 
 <!-- Toast notifications -->
 <div class="toast" id="toast"></div>
+
+<!-- ===================== PRODUCT DETAIL MODAL ===================== -->
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Product details">
+  <button class="modal-close" id="modalClose" aria-label="Close product details">&times;</button>
+  <div class="modal-body" id="modalContent">
+    <!-- injected by JS: gallery, price, size selector, specs, description -->
+  </div>
+</div>
 
 <script src="js/main.js" defer></script>
 </body>
