@@ -15,7 +15,7 @@
 
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/rare-vision      # <-- CHANGE THIS
+  repo: abdellrahmanattia/rare-vision      # <-- CHANGE THIS
   branch: main
   base_url: https://rare-vision.pages.dev        # <-- CHANGE THIS (no trailing slash)
   auth_endpoint: api/auth                      # matches functions/api/auth.js
