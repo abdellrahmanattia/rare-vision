@@ -1,0 +1,34 @@
+rules_version = '2';
+
+// ============================================================================
+// RARE VISION — Firebase Storage Security Rules
+// Deploy: Firebase Console → Build → Storage → Rules tab → paste → Publish.
+// ============================================================================
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Review photos: any signed-in shopper can upload one (used by the
+    // "Share a picture" step of the review modal); anyone can view review
+    // photos once posted (they show up publicly on the product page).
+    match /review-photos/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && request.auth.uid == userId
+                   && request.resource.size < 8 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    // Product photos uploaded from the admin dashboard's Product form.
+    match /product-photos/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && request.auth.token.email == 'admin@yourdomain.com'
+                   && request.resource.size < 15 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Your Order | Rare Vision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="assets/logos/rare-vision-logo.png">
+</head>
+<body>
+
+<div class="track-wrap">
+  <h1 class="shop-page-title" style="text-align:center;margin-bottom:6px;">Track Your Order</h1>
+  <p style="text-align:center;color:var(--text-muted);font-size:13.5px;margin:0 0 28px;" id="trackSubtitle">Enter the email you used at checkout to see your orders.</p>
+
+  <div class="track-lookup">
+    <input type="email" id="trackEmailInput" placeholder="you@example.com">
+    <button id="trackLookupBtn" type="button">Track</button>
+  </div>
+  <p class="form-error" id="trackError" hidden style="color:var(--red);font-size:13px;margin:-16px 0 20px;"></p>
+
+  <div id="trackResults"></div>
+  <div class="track-empty" id="trackEmpty" hidden>No orders found for that email.</div>
+  <div class="loading-state" id="trackLoading" hidden><div class="spinner"></div><p>Looking up your orders…</p></div>
+</div>
+
+<script src="js/shared.js" defer></script>
+<script type="module" src="js/site-common.js"></script>
+<script type="module" src="js/track-order.js"></script>
+</body>
+</html>

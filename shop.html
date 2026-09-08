@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop All | Rare Vision</title>
+<meta name="description" content="Browse the full Rare Vision catalog — filter by category, gender, or search.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="assets/logos/rare-vision-logo.png">
+</head>
+<body>
+
+<section class="shop-page-header">
+  <h1 class="shop-page-title" id="shopPageTitle">Shop All</h1>
+</section>
+
+<section class="shop-section" id="shop" style="padding-top:8px;">
+  <div class="shop-toolbar">
+    <div class="filter-pills" id="categoryPills">
+      <button class="pill" data-category="Accessories">Accessories</button>
+      <button class="pill" data-category="Shoes">Shoes</button>
+      <button class="pill" data-category="Clothes">Clothes</button>
+      <button class="pill" data-category="Brands">Brands</button>
+      <button class="pill active" data-category="all">All</button>
+    </div>
+
+    <div class="search-box">
+      <button class="search-clear" id="searchClear" aria-label="Clear search" hidden>&times;</button>
+      <input type="text" id="searchInput" placeholder="Search for models, brands, or colors...">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="gender-dropdown" id="genderDropdown">
+      <button class="gender-dropdown-btn" id="genderDropdownBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+        <span id="genderDropdownLabel">All Genders</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="gender-dropdown-menu" id="genderDropdownMenu" role="listbox" hidden>
+        <li role="option" data-value="all">All Genders</li>
+        <li role="option" data-value="Men">Men</li>
+        <li role="option" data-value="Women">Women</li>
+        <li role="option" data-value="Unisex">Unisex</li>
+        <li role="option" data-value="Kids">Kids</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="results-meta" id="resultsMeta"></p>
+  <div class="shop-grid" id="productsGrid"><!-- injected by JS --></div>
+
+  <div class="empty-state" id="emptyState" hidden>
+    <p>No products match your search.</p>
+    <button class="btn-select-size" id="resetFilters" style="max-width:220px;margin:0 auto;">Reset Filters</button>
+  </div>
+  <div class="loading-state" id="loadingState">
+    <div class="spinner"></div>
+    <p>Loading products…</p>
+  </div>
+</section>
+
+<script src="js/shared.js" defer></script>
+<script type="module" src="js/site-common.js"></script>
+<script type="module" src="js/shop.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+rules_version = '2';
+
+// ============================================================================
+// RARE VISION — Firestore Security Rules
+//
+// HOW TO DEPLOY: Firebase Console → Build → Firestore Database → Rules tab →
+// paste this whole file → Publish. (Or via CLI: `firebase deploy --only
+// firestore:rules` if you use the Firebase CLI.)
+//
+// IMPORTANT: change ADMIN_EMAIL below to match js/firebase-init.js exactly.
+// This file — not the JavaScript — is what actually stops a non-admin from
+// writing to products/orders/promo codes/etc. The JS check is only there to
+// hide the admin UI from shoppers; a visitor who bypasses it entirely (e.g.
+// by calling Firestore directly from the browser console) is stopped here.
+// ============================================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      // ⬇️ MUST match ADMIN_EMAIL in js/firebase-init.js ⬇️
+      return isSignedIn() && request.auth.token.email == 'admin@yourdomain.com';
+    }
+
+    function isOwner(email) {
+      return isSignedIn() && request.auth.token.email == email;
+    }
+
+    // ---- products : public catalog, admin-managed ------------------------
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---- orders : anyone can place a guest order; only the admin can list
+    //      /update them; a signed-in shopper can read their OWN orders (by
+    //      uid) for the "My Orders" view. Guest email-based tracking is
+    //      handled with looser read access by design (see README — "Track
+    //      Order" trade-offs) since there is no server here to broker that
+    //      lookup; avoid storing anything beyond what's needed to fulfill
+    //      the order. -------------------------------------------------------
+    match /orders/{orderId} {
+      allow create: if true; // guest checkout — no login required to buy
+      allow read: if isAdmin()
+                  || (isSignedIn() && resource.data.userId == request.auth.uid)
+                  || (resource.data.customerEmail is string && resource.data.customerEmail.size() > 0);
+      allow update: if isAdmin(); // only admin changes orderStatus etc.
+      allow delete: if isAdmin();
+    }
+
+    // ---- reviews (public, already approved) -------------------------------
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if false; // reviews only ever arrive via pending_reviews
+      allow update, delete: if isAdmin();
+    }
+
+    // ---- pending_reviews (awaiting moderation) -----------------------------
+    match /pending_reviews/{reviewId} {
+      allow create: if isSignedIn(); // must be logged in to submit a review
+      allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // ---- promo_codes : public read so checkout can validate a typed code,
+    //      admin-only write. Same documented trade-off as the project's
+    //      original client-side WELCOME10/FREESHIP codes — see README. ------
+    match /promo_codes/{codeId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---- waitlist (restock "Notify Me" requests) ---------------------------
+    match /waitlist/{entryId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ---- reports ("Report this product") -----------------------------------
+    match /reports/{reportId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ---- email_queue : written by the idle popup (new subscriber) and by
+    //      the admin "Restock & Notify" button; read/processed by the Google
+    //      Apps Script automation (which authenticates with the site owner's
+    //      own Google account, not through these client rules — see
+    //      google-apps-script/README.md) and by the admin dashboard. --------
+    match /email_queue/{emailId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ---- email_subscribers (15% idle-popup signups) ------------------------
+    match /email_subscribers/{subId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ---- settings/site (announcement banner) -------------------------------
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---- presence (lightweight "active visitors right now" heartbeat) -----
+    match /presence/{sessionId} {
+      allow create, update: if true;
+      allow read: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Deny everything else by default (implicit — no matching rule = deny).
+  }
+}

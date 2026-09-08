@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Rare Vision</title>
+<meta name="description" id="pageDescription" content="Shop premium apparel at Rare Vision.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="assets/logos/rare-vision-logo.png">
+</head>
+<body>
+
+<div class="pdp-wrap" id="pdpRoot" hidden>
+  <div class="pdp-grid">
+
+    <!-- ===================== GALLERY ===================== -->
+    <div class="pdp-gallery">
+      <div class="pdp-gallery-main" id="galleryMain">
+        <div class="pdp-gallery-track" id="galleryTrack"><!-- injected --></div>
+        <button class="pdp-gallery-nav prev" id="galleryPrev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="pdp-gallery-nav next" id="galleryNext" aria-label="Next image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="pdp-gallery-expand" id="galleryExpand" aria-label="View fullscreen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="pdp-gallery-dots" id="galleryDots"></div>
+    </div>
+
+    <!-- ===================== INFO ===================== -->
+    <div class="pdp-info">
+      <div class="pdp-badges" id="pdpBadges"></div>
+      <h1 class="pdp-title" id="pdpTitle"></h1>
+      <div class="pdp-price-row" id="pdpPriceRow"></div>
+      <div class="pdp-rating-row" id="pdpRatingRow"></div>
+      <p class="pdp-features" id="pdpFeatures"></p>
+      <button class="pdp-learn-more" id="pdpLearnMore" hidden>Learn more</button>
+
+      <div id="pdpSwatchesBlock" hidden>
+        <p class="pdp-section-label">COLOR <span class="value" id="pdpColorName"></span></p>
+        <div class="pdp-swatches" id="pdpSwatches"></div>
+      </div>
+
+      <div class="pdp-row-split">
+        <div>
+          <p class="pdp-section-label">Target Category</p>
+          <span class="pdp-target-pill" id="pdpTargetPill"></span>
+        </div>
+        <div>
+          <p class="pdp-section-label">Quantity</p>
+          <div class="pdp-qty-stepper">
+            <button type="button" id="pdpQtyDec" aria-label="Decrease quantity">−</button>
+            <span id="pdpQtyValue">1</span>
+            <button type="button" id="pdpQtyInc" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="pdpSizeBlock">
+        <p class="pdp-section-label">SIZE</p>
+        <div class="pdp-size-grid" id="pdpSizeGrid"></div>
+      </div>
+
+      <button class="pdp-cta-btn" id="pdpCtaBtn" disabled>SELECT A SIZE</button>
+
+      <div class="pdp-trust-box">
+        <p class="pdp-shipping-line">Standard shipping: 1-5 Working Days!</p>
+        <div class="pdp-trust-grid">
+          <div class="pdp-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="19" height="13" rx="2"/><path d="M2.5 10h19M6 14h3" stroke-linecap="round"/><circle cx="16.5" cy="14" r="1.4" fill="currentColor" stroke="none"/></svg> Cash on Delivery</div>
+          <div class="pdp-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3Z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg> Secure Checkout</div>
+          <div class="pdp-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 12a9 9 0 0 1-15 6.7L3 16" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 4v4h-4M3 20v-4h4" stroke-linecap="round" stroke-linejoin="round"/></svg> Easy Returns &amp; Exchanges</div>
+          <div class="pdp-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.4"/></svg> Track Your Order</div>
+        </div>
+      </div>
+
+      <div class="pdp-accordions" id="pdpAccordions"></div>
+      <button class="pdp-report-link" id="reportProductBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v5" stroke-linecap="round"/><circle cx="12" cy="16.2" r=".6" fill="currentColor" stroke="none"/></svg>
+        Report this product
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="pdp-wrap" id="pdpLoading">
+  <div class="loading-state"><div class="spinner"></div><p>Loading product…</p></div>
+</div>
+<div class="pdp-wrap" id="pdpNotFound" hidden>
+  <div class="empty-state"><p>We couldn't find that product.</p><a class="btn-select-size" href="shop.html" style="display:inline-block;width:auto;padding:12px 28px;">Back to Shop</a></div>
+</div>
+
+<!-- ===================== RECOMMENDATIONS ===================== -->
+<section class="pdp-reco-section" id="recoWeRecommend" hidden>
+  <h2 class="pdp-reco-heading">WE RECOMMEND</h2>
+  <div class="pdp-reco-grid" id="recoWeRecommendGrid"></div>
+</section>
+
+<section class="pdp-reco-section" id="recoHighVolume" hidden>
+  <h2 class="pdp-reco-heading">You might also like</h2>
+  <div class="pdp-reco-grid" id="recoHighVolumeGrid"></div>
+</section>
+
+<section class="pdp-reco-section" id="recoBestSeller" hidden>
+  <div class="pdp-reco-heading-row">
+    <h2 class="pdp-reco-heading" style="margin:0;">Best Seller in this Category</h2>
+    <a href="shop.html?filter=bestsellers" class="view-all-link">View all</a>
+  </div>
+  <div class="pdp-reco-grid" id="recoBestSellerGrid"></div>
+</section>
+
+<!-- ===================== REVIEWS ===================== -->
+<section class="reviews-wrap" id="reviewsSection" hidden>
+  <div class="reviews-summary-col">
+    <h2 class="reviews-summary-heading">Customer Reviews</h2>
+    <div class="reviews-avg-row">
+      <span class="stars" id="reviewsAvgStars"></span>
+      <span class="avg-num" id="reviewsAvgNum">0.0</span>
+      <span>out of 5</span>
+    </div>
+    <p class="reviews-count-line" id="reviewsCountLine">0 global ratings</p>
+    <div id="ratingBars"></div>
+
+    <div class="reviews-write-block">
+      <h4>Review this product</h4>
+      <p>Share your Reviews with other customers</p>
+      <button class="btn-write-review" id="writeReviewBtn">Write a review</button>
+      <p class="review-locked-note" id="reviewLockedNote" hidden></p>
+    </div>
+  </div>
+
+  <div class="reviews-feed-col">
+    <h2 class="reviews-feed-heading">Reviews</h2>
+    <div class="reviews-sort-row">
+      <select id="reviewsSort">
+        <option value="recent">Most Recent</option>
+        <option value="highest">Highest Rated</option>
+        <option value="lowest">Lowest Rated</option>
+      </select>
+    </div>
+    <div class="reviews-feed-grid" id="reviewsFeedGrid"></div>
+    <p id="reviewsEmptyNote" style="text-align:center;color:var(--text-muted);font-size:13px;" hidden>No reviews yet — be the first!</p>
+    <div class="reviews-pagination" id="reviewsPagination" hidden></div>
+  </div>
+</section>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="lightbox-track" id="lightboxTrack"></div>
+  <button class="lightbox-nav next" id="lightboxNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</div>
+
+<!-- ===================== NOTIFY ME MODAL ===================== -->
+<div class="simple-modal-overlay" id="notifyModalOverlay">
+  <div class="simple-modal">
+    <button class="simple-modal-close" id="notifyModalClose" aria-label="Close">&times;</button>
+    <div id="notifyModalForm">
+      <h3>Notify me when available</h3>
+      <p class="subtext">We'll email you the moment this size is back in stock.</p>
+      <input type="email" id="notifyEmailInput" placeholder="you@example.com">
+      <p class="form-error" id="notifyFormError" hidden style="color:var(--red);font-size:12.5px;margin:-6px 0 12px;"></p>
+      <button class="btn-submit" id="notifySubmitBtn">Notify Me</button>
+    </div>
+    <div id="notifyModalSuccess" hidden>
+      <p class="form-success">You're on the list! We'll email you the moment it's back.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== REPORT MODAL ===================== -->
+<div class="simple-modal-overlay" id="reportModalOverlay">
+  <div class="simple-modal">
+    <button class="simple-modal-close" id="reportModalClose" aria-label="Close">&times;</button>
+    <div id="reportModalForm">
+      <h3>Report this product</h3>
+      <p class="subtext">Let us know what's wrong — incorrect info, inappropriate content, etc.</p>
+      <input type="email" id="reportEmailInput" placeholder="Your email (so we can follow up)">
+      <textarea id="reportDescriptionInput" placeholder="Describe the issue"></textarea>
+      <p class="form-error" id="reportFormError" hidden style="color:var(--red);font-size:12.5px;margin:-6px 0 12px;"></p>
+      <button class="btn-submit" id="reportSubmitBtn">Submit Report</button>
+    </div>
+    <div id="reportModalSuccess" hidden>
+      <p class="form-success">Thanks — our team will take a look shortly.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== REVIEW MODAL (4 steps) ===================== -->
+<div class="review-modal-overlay" id="reviewModalOverlay">
+  <div class="review-modal">
+    <button class="review-modal-close" id="reviewModalClose" aria-label="Close">&times;</button>
+
+    <!-- Step 1: stars -->
+    <div class="review-step" id="reviewStep1">
+      <h3>How would you rate this product?</h3>
+      <p class="subtext">We would love it if you would share a bit about your experience.</p>
+      <div class="review-modal-product">
+        <img id="reviewModalProductImg" alt="">
+        <p class="name" id="reviewModalProductName"></p>
+      </div>
+      <div class="review-star-picker" id="reviewStarPicker">
+        <button data-star="1"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.9L6 21l1.6-7L2.2 9.2l7.1-.6L12 2z"/></svg></button>
+        <button data-star="2"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.9L6 21l1.6-7L2.2 9.2l7.1-.6L12 2z"/></svg></button>
+        <button data-star="3"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.9L6 21l1.6-7L2.2 9.2l7.1-.6L12 2z"/></svg></button>
+        <button data-star="4"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.9L6 21l1.6-7L2.2 9.2l7.1-.6L12 2z"/></svg></button>
+        <button data-star="5"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.9L6 21l1.6-7L2.2 9.2l7.1-.6L12 2z"/></svg></button>
+      </div>
+      <div class="review-star-labels"><span>Poor</span><span>Great</span></div>
+      <div class="review-modal-actions" style="justify-content:flex-end;">
+        <button class="review-next-btn" id="reviewStep1Next" disabled>Next</button>
+      </div>
+    </div>
+
+    <!-- Step 2: title + text -->
+    <div class="review-step" id="reviewStep2" hidden>
+      <h3 style="text-align:center;">Tell us more</h3>
+      <div class="review-form-row">
+        <label>Review content (Required)</label>
+        <textarea id="reviewContentInput" placeholder="Start writing here..."></textarea>
+      </div>
+      <div class="review-form-row">
+        <label>Review Title</label>
+        <input type="text" id="reviewTitleInput" placeholder="Give your review a title">
+      </div>
+      <p class="review-terms-note">We'll only contact you about your review if necessary. By submitting your review, you agree to our terms and conditions and privacy policy.</p>
+      <div class="review-modal-actions">
+        <button class="review-back-btn" id="reviewStep2Back">&larr; Back</button>
+        <button class="review-next-btn" id="reviewStep2Next">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 3: photo upload -->
+    <div class="review-step" id="reviewStep3" hidden>
+      <h3>Share a picture</h3>
+      <p class="subtext">Upload a photo to support your review.</p>
+      <div class="review-upload-box" id="reviewUploadBox">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V4M7 9l5-5 5 5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke-linecap="round"/></svg>
+        <p><strong>Click to upload</strong> or drag and drop</p>
+        <input type="file" id="reviewPhotoInput" accept="image/*" hidden>
+      </div>
+      <img id="reviewPhotoPreview" class="review-upload-preview" hidden>
+      <button class="review-skip-link" id="reviewStep3Skip">Skip this step</button>
+      <div class="review-modal-actions">
+        <button class="review-back-btn" id="reviewStep3Back">&larr; Back</button>
+        <button class="review-next-btn" id="reviewStep3Next">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 4: success -->
+    <div class="review-step" id="reviewStep4" hidden>
+      <h3>Thanks for your review!</h3>
+      <p class="subtext">We are processing it and it will appear on the store soon.</p>
+      <button class="review-next-btn" id="reviewStep4Close" style="width:100%;margin-top:10px;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== STICKY ADD TO BAG ===================== -->
+<div class="sticky-atb" id="stickyAtb">
+  <img id="stickyAtbImg" alt="">
+  <span class="sticky-atb-name" id="stickyAtbName"></span>
+  <span class="sticky-atb-price" id="stickyAtbPrice"></span>
+  <button class="btn-select-size" id="stickyAtbBtn">Select a size</button>
+</div>
+
+<script src="js/shared.js" defer></script>
+<script type="module" src="js/site-common.js"></script>
+<script type="module" src="js/product.js"></script>
+</body>
+</html>

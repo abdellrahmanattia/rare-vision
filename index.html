@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rare Vision | Expect Only The Exceptional</title>
+<meta name="description" content="Rare Vision — premium sneakers, apparel, and accessories. Shop new arrivals and best sellers, order in a tap.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="assets/logos/rare-vision-logo.png">
+</head>
+<body>
+
+<!-- Header, footer, sign-in drawer, idle popup, and cart panel are injected
+     by js/site-common.js and js/cart.js — see those files. -->
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
+    <source src="assets/hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Expect Only The Exceptional!</h1>
+    <div class="hero-actions">
+      <a href="#new-arrivals" class="btn-hero-primary">New Arrivals</a>
+      <a href="shop.html" class="btn-hero-outline">Shop All</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NEW ARRIVALS ===================== -->
+<section class="showcase-section" id="new-arrivals">
+  <h2 class="showcase-heading">NEW ARRIVALS</h2>
+  <div class="home-grid" id="newArrivalsGrid"><!-- injected by JS --></div>
+  <a href="shop.html?filter=new" class="view-all-link">View all</a>
+</section>
+
+<!-- ===================== BEST SELLERS ===================== -->
+<section class="showcase-section" id="best-sellers">
+  <h2 class="showcase-heading">BEST SELLERS</h2>
+  <div class="home-grid" id="bestSellersGrid"><!-- injected by JS --></div>
+  <a href="shop.html?filter=bestsellers" class="view-all-link">View all</a>
+</section>
+
+<!-- ===================== BRAND MARQUEE ===================== -->
+<section class="brand-marquee-section" aria-label="Brands">
+  <div class="brand-marquee">
+    <div class="brand-track" id="brandTrack"><!-- injected by JS --></div>
+  </div>
+</section>
+
+<!-- ===================== SHOP BY CATEGORY (tiles → shop.html) ===================== -->
+<section class="shop-section" id="shop">
+  <h2 class="showcase-heading">SHOP BY CATEGORY</h2>
+  <div class="filter-pills" style="justify-content:center;flex-wrap:wrap;">
+    <a class="pill" href="shop.html?category=Clothes">Clothes</a>
+    <a class="pill" href="shop.html?category=Shoes">Shoes</a>
+    <a class="pill" href="shop.html?category=Accessories">Accessories</a>
+    <a class="pill" href="shop.html?category=Brands">Brands</a>
+    <a class="pill" href="shop.html?gender=Men">Men</a>
+    <a class="pill" href="shop.html?gender=Women">Women</a>
+    <a class="pill" href="shop.html?gender=Kids">Kids</a>
+    <a class="pill active" href="shop.html">All</a>
+  </div>
+</section>
+
+<script src="js/shared.js" defer></script>
+<script type="module" src="js/site-common.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

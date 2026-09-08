@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Rare Vision</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="assets/logos/rare-vision-logo.png">
+</head>
+<body class="checkout-page">
+
+<header class="checkout-header">
+  <div class="checkout-header-inner">
+    <a href="index.html" class="checkout-logo logo-lockup-v2" aria-label="Rare Vision home">
+      <img src="assets/logos/rare-vision-logo.png" alt="Rare Vision" width="32" height="32">
+    </a>
+  </div>
+</header>
+
+<main class="checkout-main">
+  <div class="checkout-grid">
+
+    <!-- ===================== LEFT COLUMN: FORM ===================== -->
+    <section class="checkout-form-col">
+      <form id="checkoutPageForm" novalidate>
+
+        <div class="checkout-section">
+          <h2 class="checkout-section-title">Delivery</h2>
+
+          <div class="form-row two-col">
+            <label>
+              First name
+              <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+            </label>
+            <label>
+              Last name
+              <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              Phone
+              <input type="tel" id="phone" name="phone" required placeholder="01xxxxxxxxx" autocomplete="tel">
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              Full Address (Governorate, Area, Street)
+              <input type="text" id="fullAddress" name="fullAddress" required placeholder="e.g. Cairo, Nasr City, Makram Ebeid St." autocomplete="street-address">
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              Email Address
+              <input type="email" id="customerEmail" name="customerEmail" placeholder="Enter email to track order and review products (Optional)" autocomplete="email">
+            </label>
+          </div>
+
+          <div class="form-row three-col">
+            <label>
+              Governorate
+              <select id="governorate" name="governorate">
+                <!-- injected by checkout.js from the shared GOVERNORATES list -->
+              </select>
+            </label>
+
+            <div class="pin-location-field">
+              <span class="field-label">Location</span>
+              <button type="button" id="pinLocationBtn" class="btn-pin-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21Z" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.4"/></svg>
+                <span id="pinLocationBtnText">Pin Location (Optional)</span>
+              </button>
+              <p class="pin-location-status" id="pinLocationStatus" hidden>Location pinned ✓</p>
+            </div>
+
+            <label>
+              Notes (optional)
+              <input type="text" id="orderNotes" name="notes" placeholder="Any extra details about your order">
+            </label>
+          </div>
+        </div>
+
+        <div class="checkout-section">
+          <h2 class="checkout-section-title">Shipping method</h2>
+          <div class="shipping-method-box">
+            <span class="shipping-method-radio"></span>
+            <span class="shipping-method-label">Shipping (1-5 Working Days)</span>
+            <span class="shipping-method-price" id="shippingMethodPrice">E£85.00</span>
+          </div>
+        </div>
+
+        <div class="checkout-section">
+          <h2 class="checkout-section-title">Payment</h2>
+          <p class="checkout-section-subtitle">All transactions are secure and encrypted.</p>
+          <div class="payment-method-box selected">
+            <span class="payment-method-radio"></span>
+            <span>Cash on Delivery (COD)</span>
+          </div>
+        </div>
+
+        <p class="form-error" id="checkoutFormError" hidden></p>
+
+        <button type="submit" class="btn-complete-order" id="completeOrderBtn">
+          <span class="btn-text">Complete Order</span>
+          <span class="btn-spinner" hidden></span>
+        </button>
+      </form>
+
+      <!-- Thank-you state (replaces the form after a successful submission) -->
+      <div class="checkout-thank-you" id="checkoutThankYou" hidden>
+        <div class="thank-you-icon">&check;</div>
+        <h2>Your order was sent!</h2>
+        <p>Thank you for shopping with Rare Vision. We'll reach out shortly to confirm delivery.</p>
+        <a href="index.html" class="btn-select-size" style="max-width:260px;display:inline-block;text-align:center;">Continue Shopping</a>
+      </div>
+    </section>
+
+    <!-- ===================== RIGHT COLUMN: ORDER SUMMARY ===================== -->
+    <aside class="checkout-summary-col">
+      <div class="checkout-summary-sticky">
+        <h2 class="checkout-section-title">Order Summary</h2>
+
+        <div class="summary-items" id="summaryItems">
+          <!-- injected by checkout.js -->
+        </div>
+
+        <div class="discount-section">
+          <button type="button" class="discount-toggle" id="discountToggle">Add discount</button>
+          <div class="discount-form" id="discountForm" hidden>
+            <input type="text" id="discountInput" placeholder="Discount code or gift card">
+            <button type="button" class="btn-apply-discount" id="applyDiscountBtn">Apply</button>
+          </div>
+          <p class="discount-message" id="discountMessage" hidden></p>
+        </div>
+
+        <div class="summary-totals">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summarySubtotal">E£0.00</span>
+          </div>
+          <div class="summary-row" id="summaryDiscountRow" hidden>
+            <span id="summaryDiscountLabel">Discount</span>
+            <span id="summaryDiscountAmount">-E£0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span id="summaryShipping">E£85.00</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span id="summaryTotal">EGP 0.00</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<!-- ===================== GOOGLE MAPS PIN MODAL ===================== -->
+<div class="modal-overlay" id="mapModalOverlay"></div>
+<div class="map-modal" id="mapModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Pin your location">
+  <div class="map-modal-header">
+    <h3>Pin Your Location</h3>
+    <button class="modal-close" id="mapModalClose" type="button" aria-label="Close">&times;</button>
+  </div>
+  <div class="map-modal-body">
+    <div id="mapCanvas" class="map-canvas"></div>
+    <p class="map-modal-hint">Drag the pin, or tap the map, to mark your exact location.</p>
+  </div>
+  <div class="map-modal-footer">
+    <button type="button" class="btn-ghost-dark" id="mapModalCancel">Cancel</button>
+    <button type="button" class="btn-select-size" id="mapModalConfirm">Confirm Location</button>
+  </div>
+</div>
+
+<div class="toast" id="checkoutToast"></div>
+
+<script src="js/shared.js"></script>
+<script type="module" src="js/checkout.js"></script>
+</body>
+</html>
