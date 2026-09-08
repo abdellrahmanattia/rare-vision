@@ -1,1 +1,0 @@
-ضع هنا ملف الفيديو باسم hero-video.mp4 وصورة hero-poster.jpg (اختياري). راجع README.md لمزيد من التفاصيل.
