@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Rare Vision</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+<link rel="icon" href="../assets/logos/rare-vision-logo.png">
+</head>
+<body class="admin-body">
+
+<!-- ===================== LOGIN GATE ===================== -->
+<div class="admin-login-wrap" id="adminLoginWrap">
+  <div class="admin-login-card">
+    <img src="../assets/logos/rare-vision-logo.png" alt="Rare Vision" width="56" height="56">
+    <h1>Admin Dashboard</h1>
+    <p class="subtext">Sign in with the store's admin account.</p>
+    <form id="adminLoginForm" novalidate>
+      <input type="email" id="adminEmail" placeholder="Admin email" required autocomplete="email">
+      <input type="password" id="adminPassword" placeholder="Password" required autocomplete="current-password">
+      <p class="form-error" id="adminLoginError" hidden></p>
+      <button type="submit" class="btn-submit" id="adminLoginBtn">Sign In</button>
+    </form>
+    <a href="../index.html" class="admin-back-link">&larr; Back to store</a>
+  </div>
+</div>
+
+<!-- ===================== DASHBOARD SHELL ===================== -->
+<div class="admin-shell" id="adminShell" hidden>
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <img src="../assets/logos/rare-vision-logo.png" alt="Rare Vision" width="34" height="34">
+      <span>Admin</span>
+    </div>
+    <nav class="admin-nav">
+      <button class="admin-nav-item active" data-tab="analytics">Analytics</button>
+      <button class="admin-nav-item" data-tab="products">Products</button>
+      <button class="admin-nav-item" data-tab="orders">Orders</button>
+      <button class="admin-nav-item" data-tab="reviews">Reviews</button>
+      <button class="admin-nav-item" data-tab="promo">Promo Codes</button>
+      <button class="admin-nav-item" data-tab="waitlist">Waitlist &amp; Reports</button>
+      <button class="admin-nav-item" data-tab="banner">Banner</button>
+    </nav>
+    <a href="../index.html" class="admin-nav-item admin-nav-storelink">&larr; Back to store</a>
+    <button class="admin-nav-item admin-nav-signout" id="adminSignOutBtn">Sign Out</button>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <h1 id="adminTabTitle">Analytics</h1>
+      <span class="admin-topbar-user" id="adminUserEmail"></span>
+    </header>
+
+    <section class="admin-tab" id="tab-analytics">
+      <div class="admin-stat-grid" id="analyticsGrid"></div>
+    </section>
+
+    <section class="admin-tab" id="tab-products" hidden>
+      <div class="admin-toolbar">
+        <button class="admin-btn-primary" id="newProductBtn">+ New Product</button>
+        <button class="admin-btn-ghost" id="importLegacyBtn">Import legacy catalog (data/products.json)</button>
+        <span class="admin-toolbar-note" id="importLegacyNote"></span>
+      </div>
+      <div id="productForm" class="admin-form-panel" hidden></div>
+      <div class="admin-table-wrap"><table class="admin-table" id="productsTable"></table></div>
+    </section>
+
+    <section class="admin-tab" id="tab-orders" hidden>
+      <div class="admin-table-wrap"><table class="admin-table" id="ordersTable"></table></div>
+    </section>
+
+    <section class="admin-tab" id="tab-reviews" hidden>
+      <div class="admin-table-wrap"><table class="admin-table" id="reviewsTable"></table></div>
+    </section>
+
+    <section class="admin-tab" id="tab-promo" hidden>
+      <div class="admin-toolbar"><button class="admin-btn-primary" id="newPromoBtn">+ New Promo Code</button></div>
+      <div id="promoForm" class="admin-form-panel" hidden></div>
+      <div class="admin-table-wrap"><table class="admin-table" id="promoTable"></table></div>
+    </section>
+
+    <section class="admin-tab" id="tab-waitlist" hidden>
+      <h3 class="admin-section-heading">Restock Waitlist</h3>
+      <div class="admin-table-wrap"><table class="admin-table" id="waitlistTable"></table></div>
+      <h3 class="admin-section-heading" style="margin-top:32px;">Product Reports</h3>
+      <div class="admin-table-wrap"><table class="admin-table" id="reportsTable"></table></div>
+    </section>
+
+    <section class="admin-tab" id="tab-banner" hidden>
+      <div class="admin-form-panel" style="display:block;max-width:520px;">
+        <label class="admin-field-label">Announcement banner text</label>
+        <input type="text" id="bannerTextInput" placeholder="e.g. Free shipping on orders over LE 1500">
+        <label class="admin-field-label" style="display:flex;align-items:center;gap:8px;margin-top:14px;">
+          <input type="checkbox" id="bannerActiveInput" style="width:auto;"> Show banner on the site
+        </label>
+        <button class="admin-btn-primary" id="saveBannerBtn" style="margin-top:16px;">Save</button>
+        <p class="admin-toolbar-note" id="bannerSavedNote"></p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="adminToast"></div>
+
+<script src="../js/shared.js" defer></script>
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>
