@@ -1,0 +1,333 @@
+{
+  "products": [
+    {
+      "id": "stealth-compression-tee",
+      "name": "Stealth Compression Tee",
+      "styleName": "",
+      "gender": "Men",
+      "productType": "T-Shirts",
+      "brand": "Stealth Athletics",
+      "sku": "RV-TSH-1001",
+      "price": 690.00,
+      "compareAtPrice": null,
+      "shortDescription": "Second-skin compression tee built for high-output training.",
+      "description": "The **Stealth Compression Tee** hugs close to the body without restricting movement, so it stays put through every set and every sprint.\n\nWhy you'll like it:\n- 4-way stretch performance knit\n- Flatlock seams to prevent chafing\n- Quick-dry finish for back-to-back sessions\n- Reflective logo for low-light visibility\n\nRuns true to size. For a looser feel, size up.",
+      "image": "https://placehold.co/800x800/f2f0ea/1a1a1a?text=Stealth+Compression+Tee",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Back+View",
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Fabric+Detail"
+      ],
+      "colors": ["#0b0b0d", "#c23b3b", "#37c6d0"],
+      "specifications": [
+        { "label": "Fit", "value": "Compression Fit" },
+        { "label": "Fabric", "value": "4-way stretch performance knit" },
+        { "label": "Sleeve", "value": "Short sleeve" },
+        { "label": "Care", "value": "Machine wash cold, do not bleach" }
+      ],
+      "badges": ["Restocked", "New Arrival"],
+      "cartSuggestion": true,
+      "averageRating": 4.1,
+      "reviewCount": 31,
+      "sizes": [
+        { "size": "S", "stockStatus": "In Stock" },
+        { "size": "M", "stockStatus": "In Stock" },
+        { "size": "L", "stockStatus": "In Stock" },
+        { "size": "XL", "stockStatus": "Out of Stock" }
+      ],
+      "inStock": true
+    },
+    {
+      "id": "contour-stripe-slim-tee",
+      "name": "Contour Stripe Slim Tee",
+      "styleName": "",
+      "gender": "Men",
+      "productType": "T-Shirts",
+      "brand": "Contour Line",
+      "sku": "RV-TSH-1002",
+      "price": 710.00,
+      "compareAtPrice": null,
+      "shortDescription": "Slim-fit tee with a signature contrast shoulder stripe.",
+      "description": "A wardrobe staple with just enough detail to stand out. The **Contour Stripe Slim Tee** pairs a close, tailored cut with a clean shoulder stripe for a sport-luxe look.\n\nHighlights:\n- Slim, tailored silhouette\n- Contrast stripe detailing on both sleeves\n- Soft cotton-poly blend that resists shrinking\n\nRuns slim — if you prefer a relaxed fit, we recommend sizing up.",
+      "image": "https://placehold.co/800x800/f2f0ea/1a1a1a?text=Contour+Stripe+Slim+Tee",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Side+Profile"
+      ],
+      "colors": ["#0b0b0d", "#ffffff"],
+      "specifications": [
+        { "label": "Fit", "value": "Slim Fit" },
+        { "label": "Fabric", "value": "Cotton-poly blend" },
+        { "label": "Sleeve", "value": "Short sleeve" }
+      ],
+      "badges": ["New Arrival"],
+      "averageRating": 5.0,
+      "reviewCount": 6,
+      "sizes": [
+        { "size": "S", "stockStatus": "In Stock" },
+        { "size": "M", "stockStatus": "In Stock" },
+        { "size": "L", "stockStatus": "In Stock" },
+        { "size": "XL", "stockStatus": "In Stock" }
+      ],
+      "inStock": true
+    },
+    {
+      "id": "rival-oversized-tee",
+      "name": "Rival Oversized Tee",
+      "styleName": "",
+      "gender": "Unisex",
+      "productType": "T-Shirts",
+      "brand": "Rival Supply",
+      "sku": "RV-TSH-1003",
+      "price": 560.00,
+      "compareAtPrice": 690.00,
+      "shortDescription": "Relaxed oversized tee in heavyweight cotton.",
+      "description": "Built wide and heavy in all the right ways. The **Rival Oversized Tee** uses a boxy drop-shoulder block and a substantial 240gsm cotton so it drapes instead of clings.\n\nHighlights:\n- Oversized, drop-shoulder silhouette\n- 240gsm heavyweight cotton\n- Ribbed crewneck that holds its shape\n\nModel is 6'1\" wearing a size M for reference.",
+      "image": "https://placehold.co/800x800/f2f0ea/1a1a1a?text=Rival+Oversized+Tee",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Front+Relaxed",
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Fabric+Weight"
+      ],
+      "colors": ["#0b0b0d", "#3a5a30", "#1f3d7a", "#8a8a90", "#ffffff", "#5c5c62"],
+      "specifications": [
+        { "label": "Fit", "value": "Oversized Fit" },
+        { "label": "Fabric", "value": "240gsm heavyweight cotton" },
+        { "label": "Neckline", "value": "Ribbed crew" }
+      ],
+      "badges": ["New Arrival"],
+      "averageRating": 4.2,
+      "reviewCount": 14,
+      "sizes": [
+        { "size": "S", "stockStatus": "In Stock" },
+        { "size": "M", "stockStatus": "In Stock" },
+        { "size": "L", "stockStatus": "In Stock" },
+        { "size": "XL", "stockStatus": "In Stock" },
+        { "size": "XXL", "stockStatus": "Out of Stock" }
+      ],
+      "inStock": true
+    },
+    {
+      "id": "nova-runner-sneaker",
+      "name": "Nova Runner Sneaker",
+      "styleName": "Nova Runner",
+      "gender": "Unisex",
+      "productType": "Sneakers",
+      "brand": "Nova Athletics",
+      "sku": "RV-SNK-1024",
+      "price": 129.99,
+      "compareAtPrice": 179.99,
+      "shortDescription": "Lightweight everyday trainer with responsive cushioning.",
+      "description": "The **Nova Runner** is built for miles on the street and hours on your feet. A knit engineered mesh upper flexes with your stride, while a full-length EVA midsole keeps every step light.\n\nWhy you'll like it:\n- Breathable mesh upper keeps feet cool in warm weather\n- Rebounding EVA foam reduces fatigue on long days\n- Rubber outsole with multi-directional traction\n- Reflective pull tab for low-light visibility\n\nTrue to size for most feet. If you have a wider foot, we recommend sizing up half a size.",
+      "image": "https://placehold.co/800x800/f2f0ea/1a1a1a?text=Nova+Runner",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Side+Profile",
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Sole+Detail",
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Heel+View"
+      ],
+      "colors": ["#0b0b0d", "#f5f3ea"],
+      "specifications": [
+        { "label": "Upper Material", "value": "Engineered knit mesh" },
+        { "label": "Midsole", "value": "Full-length EVA foam" },
+        { "label": "Outsole", "value": "Rubber, multi-directional tread" },
+        { "label": "Closure", "value": "Lace-up" },
+        { "label": "Weight", "value": "9.8 oz (size 9, single shoe)" }
+      ],
+      "badges": ["Best Seller", "New Arrival"],
+      "averageRating": 4.7,
+      "reviewCount": 328,
+      "sizes": [
+        { "size": "7", "stockStatus": "In Stock" },
+        { "size": "8", "stockStatus": "In Stock" },
+        { "size": "9", "stockStatus": "Out of Stock" },
+        { "size": "10", "stockStatus": "In Stock" },
+        { "size": "11", "stockStatus": "Out of Stock" },
+        { "size": "12", "stockStatus": "In Stock" }
+      ],
+      "inStock": true
+    },
+    {
+      "id": "summit-shell-jacket",
+      "name": "Summit Shell Winter Jacket",
+      "styleName": "Summit Shell",
+      "gender": "Men",
+      "productType": "Jackets",
+      "brand": "Northline Supply Co.",
+      "sku": "RV-JKT-2051",
+      "price": 2140.00,
+      "compareAtPrice": null,
+      "shortDescription": "Insulated waterproof shell built for sub-zero commutes.",
+      "description": "Face down the coldest mornings in the **Summit Shell**. A fully seam-sealed waterproof exterior locks out wind and snow, while responsibly-sourced down insulation traps warmth without the bulk.\n\nKey features:\n- 3-layer waterproof, windproof shell fabric\n- 600-fill down insulation, ethically sourced\n- Adjustable storm hood and cuffs\n- Interior zip pocket for essentials\n\nLayers well over a mid-weight sweater. Runs true to size.",
+      "image": "https://placehold.co/800x800/f2f0ea/1a1a1a?text=Summit+Shell",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Front+Zipped",
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Hood+Detail",
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Back+View"
+      ],
+      "colors": ["#0b0b0d", "#2f3a44"],
+      "specifications": [
+        { "label": "Shell Material", "value": "3-layer waterproof nylon" },
+        { "label": "Insulation", "value": "600-fill responsibly sourced down" },
+        { "label": "Fit", "value": "Regular, true to size" },
+        { "label": "Care", "value": "Machine wash cold, hang to dry" }
+      ],
+      "badges": ["Limited Edition"],
+      "averageRating": 4.5,
+      "reviewCount": 94,
+      "sizes": [
+        { "size": "S", "stockStatus": "Out of Stock" },
+        { "size": "M", "stockStatus": "In Stock" },
+        { "size": "L", "stockStatus": "In Stock" },
+        { "size": "XL", "stockStatus": "In Stock" }
+      ],
+      "inStock": true
+    },
+    {
+      "id": "aurum-chrono-watch",
+      "name": "Aurum Automatic Chronograph",
+      "styleName": "Aurum Chrono",
+      "gender": "Men",
+      "productType": "Watches",
+      "brand": "Verrado & Sons",
+      "sku": "RV-WCH-3399",
+      "price": 14500.00,
+      "compareAtPrice": null,
+      "shortDescription": "Swiss-made automatic chronograph with a sapphire crystal.",
+      "description": "Precision meets restraint in the **Aurum Chronograph**. A Swiss automatic movement drives the hands with no battery required, visible through an exhibition case back.\n\nHighlights:\n- Self-winding Swiss automatic movement\n- Scratch-resistant sapphire crystal\n- Screw-down crown, rated to 100m water resistance\n- Genuine leather strap with signed buckle\n\nEach piece ships in a signature Rare Vision presentation box with a two-year warranty card.",
+      "image": "https://placehold.co/800x800/f2f0ea/8a6d1f?text=Aurum+Chrono",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/8a6d1f?text=Dial+Close-up",
+        "https://placehold.co/800x800/eeece5/8a6d1f?text=Case+Back",
+        "https://placehold.co/800x800/eeece5/8a6d1f?text=On+Wrist"
+      ],
+      "specifications": [
+        { "label": "Movement", "value": "Swiss automatic, 42-hour power reserve" },
+        { "label": "Case", "value": "41mm brushed stainless steel" },
+        { "label": "Water Resistance", "value": "100m / 10 ATM" },
+        { "label": "Crystal", "value": "Scratch-resistant sapphire" }
+      ],
+      "badges": ["Limited Edition"],
+      "averageRating": 4.9,
+      "reviewCount": 41,
+      "inStock": true
+    },
+    {
+      "id": "nomad-canvas-backpack",
+      "name": "Nomad Canvas Backpack",
+      "styleName": "Nomad Pack",
+      "gender": "Unisex",
+      "productType": "Accessories",
+      "brand": "Traverse Gear",
+      "sku": "RV-ACC-2001",
+      "price": 3400.00,
+      "compareAtPrice": null,
+      "shortDescription": "Waxed canvas backpack built for daily carry and travel.",
+      "description": "The **Nomad Canvas Backpack** is cut from waxed cotton canvas with full-grain leather trim, built to age well and carry everything from a laptop to a weekend's worth of layers.\n\nHighlights:\n- Water-resistant waxed cotton canvas\n- Padded 15-inch laptop sleeve\n- Leather straps with antique brass hardware\n- Roll-top flap closure with buckle straps\n\nCapacity: 22 liters.",
+      "image": "https://placehold.co/800x800/f2f0ea/6b5a3d?text=Nomad+Pack",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/6b5a3d?text=Back+Straps",
+        "https://placehold.co/800x800/eeece5/6b5a3d?text=Interior+Laptop+Sleeve"
+      ],
+      "specifications": [
+        { "label": "Material", "value": "Waxed cotton canvas with leather trim" },
+        { "label": "Capacity", "value": "22L" },
+        { "label": "Laptop Sleeve", "value": "Fits up to 15-inch" }
+      ],
+      "badges": ["Limited Edition"],
+      "cartSuggestion": true,
+      "averageRating": 4.9,
+      "reviewCount": 110,
+      "inStock": true
+    },
+    {
+      "id": "apex-vintage-snapback-cap",
+      "name": "Apex Vintage Snapback Cap",
+      "styleName": "Apex Snapback",
+      "gender": "Unisex",
+      "productType": "Hats",
+      "brand": "Skyline Apparel",
+      "sku": "RV-HAT-2002",
+      "price": 350.00,
+      "compareAtPrice": 450.00,
+      "shortDescription": "Structured five-panel snapback with vintage trucker styling.",
+      "description": "The **Apex Snapback** pairs a structured cotton twill front with a breathable mesh back, finished with a woven patch for a worn-in, vintage feel from day one.\n\nHighlights:\n- Structured five-panel construction\n- Cotton twill front, mesh back for airflow\n- Adjustable snapback closure, one size fits most\n\nSpot clean only.",
+      "image": "https://placehold.co/800x800/f2f0ea/6b5a3d?text=Apex+Snapback",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/6b5a3d?text=Side+Patch",
+        "https://placehold.co/800x800/eeece5/6b5a3d?text=Back+Closure"
+      ],
+      "specifications": [
+        { "label": "Material", "value": "Cotton twill front, mesh back" },
+        { "label": "Closure", "value": "Adjustable snapback" }
+      ],
+      "badges": ["Best Seller", "New Arrival"],
+      "cartSuggestion": true,
+      "averageRating": 4.8,
+      "reviewCount": 330,
+      "inStock": true
+    },
+    {
+      "id": "street-swift-sneaker",
+      "name": "Street Swift Retro-Runner Sneaker",
+      "styleName": "Street Swift",
+      "gender": "Unisex",
+      "productType": "Sneakers",
+      "brand": "Vortex Footwear",
+      "sku": "RV-SNK-2003",
+      "price": 1800.00,
+      "compareAtPrice": 2200.00,
+      "shortDescription": "Retro-inspired runner with a cushioned gum outsole.",
+      "description": "The **Street Swift** brings 90s running silhouettes back with modern comfort underfoot. Leather and suede paneling sits on a cushioned midsole and a gum rubber outsole for all-day wear.\n\nHighlights:\n- Leather and suede upper paneling\n- Cushioned foam midsole\n- Gum rubber outsole for grip and a retro finish\n\nFits true to size.",
+      "image": "https://placehold.co/800x800/f2f0ea/1a1a1a?text=Street+Swift",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Side+Profile",
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Sole+Detail"
+      ],
+      "colors": ["#f5f3ea", "#8a5a34"],
+      "specifications": [
+        { "label": "Upper", "value": "Leather and suede" },
+        { "label": "Outsole", "value": "Rubber, gum finish" },
+        { "label": "Fit", "value": "True to size" }
+      ],
+      "badges": ["Best Seller"],
+      "averageRating": 5.0,
+      "reviewCount": 165,
+      "sizes": [
+        { "size": "7", "stockStatus": "In Stock" },
+        { "size": "8", "stockStatus": "Out of Stock" },
+        { "size": "9", "stockStatus": "In Stock" },
+        { "size": "10", "stockStatus": "In Stock" },
+        { "size": "11", "stockStatus": "Out of Stock" }
+      ],
+      "inStock": true
+    },
+    {
+      "id": "core-athletic-performance-tee",
+      "name": "Core Athletic Performance Tee",
+      "styleName": "Core Tee",
+      "gender": "Unisex",
+      "productType": "T-Shirts",
+      "brand": "Vitality Clothing",
+      "sku": "RV-TSH-2004",
+      "price": 780.00,
+      "compareAtPrice": null,
+      "shortDescription": "Performance tee with mapped ventilation zones.",
+      "description": "Built for training days, the **Core Tee** places mesh ventilation exactly where you run hot, without sacrificing the clean look of a everyday tee.\n\nHighlights:\n- Mapped mesh ventilation zones\n- Moisture-wicking, quick-dry knit\n- Tagless neck label for all-day comfort\n\nTrue to size, athletic fit.",
+      "image": "https://placehold.co/800x800/f2f0ea/1a1a1a?text=Core+Tee",
+      "gallery": [
+        "https://placehold.co/800x800/eeece5/1a1a1a?text=Back+Ventilation"
+      ],
+      "specifications": [
+        { "label": "Fit", "value": "Athletic Fit" },
+        { "label": "Fabric", "value": "Moisture-wicking mesh knit" }
+      ],
+      "badges": [],
+      "averageRating": 5.0,
+      "reviewCount": 45,
+      "sizes": [
+        { "size": "S", "stockStatus": "In Stock" },
+        { "size": "M", "stockStatus": "In Stock" },
+        { "size": "L", "stockStatus": "In Stock" },
+        { "size": "XL", "stockStatus": "In Stock" }
+      ],
+      "inStock": true
+    }
+  ]
+}
