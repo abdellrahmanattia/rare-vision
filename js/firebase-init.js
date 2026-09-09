@@ -48,12 +48,13 @@ import {
 //   ship in public client code.
 // ---------------------------------------------------------------------------
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY_HERE',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT_ID.firebasestorage.app',
-  messagingSenderId: 'YOUR_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: "AIzaSyCkVWTVffvd-eBDEJOfUiDoPZnvK7LjmXA",
+  authDomain: "rare-vision.firebaseapp.com",
+  projectId: "rare-vision",
+  storageBucket: "rare-vision.firebasestorage.app",
+  messagingSenderId: "1493216620",
+  appId: "1:1493216620:web:58251891b9011363a71749",
+  measurementId: "G-NLPWFXMTKZ"
 };
 //   ⬆️⬆️⬆️  PASTE YOUR firebaseConfig OBJECT HERE  ⬆️⬆️⬆️
 
@@ -67,7 +68,7 @@ const firebaseConfig = {
 //   — the two must always match, since the UI check below is a convenience,
 //   NOT the real security boundary; Firestore rules are.
 // ---------------------------------------------------------------------------
-export const ADMIN_EMAIL = 'admin@yourdomain.com';
+export const ADMIN_EMAIL = 'abdulrahman4reda1@gmail.com';
 
 // ---------------------------------------------------------------------------
 // INITIALIZE
