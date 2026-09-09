@@ -22,7 +22,7 @@ service cloud.firestore {
 
     function isAdmin() {
       // ⬇️ MUST match ADMIN_EMAIL in js/firebase-init.js ⬇️
-      return isSignedIn() && request.auth.token.email == 'admin@yourdomain.com';
+      return isSignedIn() && request.auth.token.email == 'abdulrahman4reda1@gmail.com';
     }
 
     function isOwner(email) {
