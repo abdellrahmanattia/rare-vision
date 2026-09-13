@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product | Rare Vision</title>
+<meta name="description" content="Shop premium performance apparel at Rare Vision.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* Report-this-product modal — textarea isn't covered by the shared
+     waitlist-modal styles (which only style a single email <input>), so
+     it gets a small scoped rule set here rather than touching css/style.css. */
+  .report-modal textarea {
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    padding: 12px 14px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    margin-bottom: 4px;
+  }
+  .report-modal textarea:focus {
+    outline: none;
+    border-color: var(--gold, #d4a017);
+  }
+
+  /* "CHOOSE OPTIONS" overlay shown on recommendation cards (We Recommend /
+     You might also like / Best Seller in this Category). Scoped here since
+     these grids previously only rendered image + name + price. */
+  .home-card-media { position: relative; }
+  .home-choose-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #111;
+    border-radius: 999px;
+    padding: 10px 22px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+</style>
+</head>
+<body>
+
+<!-- ==========================================================================
+     GLOBAL HEADER
+     Mirrors the header structure/classes already defined in css/style.css
+     (site-header / header-inner / header-search / icon-btn / main-nav) so
+     this page matches index.html and checkout.html. Uses the text
+     ".logo-lockup-fallback" lockup — swap in the eye-mark <img class="logo-img">
+     if/when that asset is available on this page too.
+     ========================================================================== -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <button type="button" class="icon-btn nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </button>
+
+      <form class="header-search" id="headerSearchForm" role="search" action="shop.html" method="get">
+        <div class="header-search-category">
+          <select id="headerSearchCategory" name="cat" aria-label="Search category">
+            <option value="all">All</option>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="accessories">Accessories</option>
+          </select>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <input type="search" id="headerSearchInput" name="q" placeholder="Search Rare Vision" aria-label="Search Rare Vision">
+        <button type="submit" class="header-search-submit" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <a href="index.html" class="logo-lockup logo-lockup-fallback" aria-label="Rare Vision home">
+      RARE&nbsp;<span style="color:var(--gold)">VISION</span>
+    </a>
+
+    <div class="header-right">
+      <button type="button" class="icon-btn" id="notifyToggle" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <span class="notify-badge" id="notifyBadge">0</span>
+      </button>
+      <a href="account.html" class="icon-btn" id="accountToggle" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+      </a>
+      <a href="cart.html" class="icon-btn" id="cartToggle" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>
+        </svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="main-nav" id="mainNav">
+    <a href="shop.html">Shop All</a>
+    <a href="shop.html?cat=men">Men</a>
+    <a href="shop.html?cat=women">Women</a>
+    <a href="shop.html?cat=accessories">Accessories</a>
+    <a href="track-order.html">Track Your Order</a>
+  </nav>
+</header>
+
+<main class="pdp-main">
+
+  <!-- Loading / not-found states -->
+  <div class="loading-state" id="pdpLoading">
+    <div class="spinner"></div>
+    <p>Loading product…</p>
+  </div>
+
+  <div class="empty-state" id="pdpNotFound" hidden>
+    <p>We couldn't find that product.</p>
+    <a href="shop.html" class="btn-select-size" style="display:inline-block;width:auto;padding:13px 26px;">Continue Shopping</a>
+  </div>
+
+  <div id="pdpContent" hidden>
+
+    <!-- ===================== GALLERY + INFO ===================== -->
+    <section class="pdp-hero">
+      <!-- Gallery -->
+      <div class="pdp-gallery">
+        <div class="pdp-slider" id="pdpSlider">
+          <div class="pdp-slider-track" id="pdpSliderTrack"></div>
+
+          <button type="button" class="pdp-slider-arrow prev" id="pdpPrev" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="pdp-slider-arrow next" id="pdpNext" aria-label="Next image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button type="button" class="pdp-expand-btn" id="pdpExpand" aria-label="Zoom image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+            </svg>
+          </button>
+
+          <div class="pdp-slider-dots" id="pdpDots"></div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="pdp-info">
+        <span class="pdp-badge-pill" id="pdpBadge" hidden></span>
+        <h1 class="pdp-title" id="pdpTitle"></h1>
+
+        <div class="pdp-price-row">
+          <span class="pdp-price-old" id="pdpPriceOld" hidden></span>
+          <span class="pdp-price-active" id="pdpPriceActive"></span>
+        </div>
+
+        <div class="pdp-rating-row" id="pdpRatingRow" hidden>
+          <span class="stars" id="pdpStars"></span>
+          <span class="pdp-rating-value" id="pdpRatingValue"></span>
+          <span class="pdp-rating-count" id="pdpRatingCount"></span>
+        </div>
+
+        <div class="pdp-features" id="pdpFeaturesBlock" hidden>
+          <p class="pdp-features-text" id="pdpFeaturesText"></p>
+          <button type="button" class="pdp-learn-more" id="pdpLearnMore" aria-expanded="false">Learn more</button>
+        </div>
+
+        <div class="pdp-color-block" id="pdpColorBlock" hidden>
+          <div class="pdp-color-label-row">
+            <span class="size-select-label">COLOR</span>
+            <span class="pdp-color-name" id="pdpColorName"></span>
+          </div>
+          <div class="pdp-color-row" id="pdpColorRow"></div>
+        </div>
+
+        <div class="pdp-meta-row">
+          <div class="pdp-meta-col" id="pdpCategoryCol">
+            <span class="size-select-label">Target Category</span>
+            <span class="pdp-category-pill" id="pdpCategoryPill"></span>
+          </div>
+          <div class="pdp-meta-col">
+            <span class="qty-select-label">Quantity</span>
+            <div class="qty-stepper">
+              <button type="button" class="qty-btn" id="pdpQtyMinus" aria-label="Decrease quantity">−</button>
+              <span class="qty-value" id="pdpQtyValue">1</span>
+              <button type="button" class="qty-btn" id="pdpQtyPlus" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pdp-size-block" id="pdpSizeBlock" hidden>
+          <span class="size-select-label">SIZE</span>
+          <div class="pdp-size-grid" id="pdpSizeGrid"></div>
+        </div>
+
+        <button type="button" class="btn-select-size" id="pdpCta" disabled>SELECT A SIZE</button>
+
+        <div class="pdp-shipping-banner">
+          <p class="pdp-shipping-title">Standard shipping: 1-5 Working Days!</p>
+          <div class="pdp-trust-grid">
+            <div class="pdp-trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+              <span>Cash on Delivery</span>
+            </div>
+            <div class="pdp-trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5z"/><polyline points="9 12 11 14 15 10"/></svg>
+              <span>Secure Checkout</span>
+            </div>
+            <div class="pdp-trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 2.1 21 6l-4 3.9"/><path d="M3 12v-1a4 4 0 0 1 4-4h14"/><path d="M7 21.9 3 18l4-3.9"/><path d="M21 12v1a4 4 0 0 1-4 4H3"/></svg>
+              <span>Easy Returns &amp; Exchanges</span>
+            </div>
+            <div class="pdp-trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.35-7-10a7 7 0 0 1 14 0c0 5.65-7 10-7 10Z"/><circle cx="12" cy="11" r="2.4"/></svg>
+              <span>Track Your Order</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COMPLETE THE LOOK ===================== -->
+    <section class="pdp-complete-look" id="completeLookSection" hidden>
+      <h2 class="pdp-section-heading">Complete the Look</h2>
+      <div class="complete-look-scroll" id="completeLookScroll"></div>
+    </section>
+
+    <!-- ===================== REVIEWS + ACCORDIONS ===================== -->
+    <section class="pdp-details-grid">
+
+      <!-- Reviews column -->
+      <div class="pdp-reviews-col">
+        <h2 class="pdp-reviews-title">Customer Reviews</h2>
+
+        <div class="reviews-average-row">
+          <span class="stars" id="reviewsAvgStars"></span>
+          <span class="reviews-average-value" id="reviewsAvgValue">0.0</span>
+          <span>out of 5</span>
+        </div>
+        <p class="reviews-count-text" id="reviewsCountText">0 global ratings</p>
+
+        <div class="rating-bars" id="ratingBars"></div>
+
+        <button type="button" class="ratings-calc-toggle" id="ratingsCalcToggle" aria-expanded="false">
+          How are ratings calculated?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <p class="ratings-calc-copy" id="ratingsCalcCopy" hidden>
+          We weigh the star rating each customer gives alongside how recent and how verified their purchase is,
+          so genuine, up-to-date feedback carries the most weight in the average shown above.
+        </p>
+
+        <div class="write-review-block">
+          <h3>Review this product</h3>
+          <p>Share your Reviews with other customers</p>
+          <button type="button" class="btn-select-size" id="writeReviewBtn" style="width:auto;padding:13px 30px;">Write a review</button>
+        </div>
+
+        <h2 class="pdp-reviews-country-heading" id="reviewsCountryHeading">Reviews</h2>
+
+        <div class="reviews-toolbar">
+          <select class="reviews-sort-select" id="reviewsSortSelect" aria-label="Sort reviews">
+            <option value="recent">Most Recent</option>
+            <option value="highest">Highest Rated</option>
+            <option value="lowest">Lowest Rated</option>
+          </select>
+        </div>
+
+        <div class="review-cards-grid" id="reviewCardsGrid"></div>
+        <div class="review-pagination" id="reviewPagination"></div>
+      </div>
+
+      <!-- Accordions column -->
+      <div class="pdp-accordion-col">
+        <div class="pdp-accordion-group" id="pdpAccordionGroup">
+
+          <div class="pdp-accordion open" data-accordion="description">
+            <button type="button" class="accordion-trigger">
+              <span>Description</span>
+              <svg class="accordion-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="accordion-panel"><p id="pdpDescriptionText">—</p></div>
+          </div>
+
+          <div class="pdp-accordion" data-accordion="details">
+            <button type="button" class="accordion-trigger">
+              <span>Product Details</span>
+              <svg class="accordion-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="accordion-panel"><div id="pdpDetailsText">—</div></div>
+          </div>
+
+          <div class="pdp-accordion" data-accordion="delivery">
+            <button type="button" class="accordion-trigger">
+              <span>Delivery</span>
+              <svg class="accordion-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="accordion-panel">
+              <p>Standard delivery takes 1–5 working days across Egypt. Orders placed before 2 PM Cairo time
+              typically ship the same day. You'll get an SMS and email with tracking as soon as your order
+              leaves the warehouse — or check progress anytime from Track Your Order.</p>
+            </div>
+          </div>
+
+          <div class="pdp-accordion" data-accordion="returns">
+            <button type="button" class="accordion-trigger">
+              <span>Returns &amp; Exchanges</span>
+              <svg class="accordion-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="accordion-panel">
+              <p>Not the right fit? Unworn items with tags attached can be returned or exchanged within 14 days
+              of delivery. Start a return anytime from Track Your Order — refunds are issued to your original
+              payment method within 5–7 business days of us receiving the item.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <button type="button" class="report-product-row" id="reportProductBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/></svg>
+          <span>Report this product</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ===================== WE RECOMMEND ===================== -->
+    <section class="showcase-section" id="recommendSection" hidden>
+      <h2 class="showcase-heading">We Recommend</h2>
+      <div class="home-grid" id="recommendGrid"></div>
+    </section>
+
+    <!-- ===================== YOU MIGHT ALSO LIKE ===================== -->
+    <section class="showcase-section" id="alsoLikeSection" hidden>
+      <h2 class="showcase-heading">You might also like</h2>
+      <div class="home-grid" id="alsoLikeGrid"></div>
+    </section>
+
+    <!-- ===================== BEST SELLER IN THIS CATEGORY ===================== -->
+    <section class="showcase-section" id="bestSellersSection" hidden>
+      <h2 class="showcase-heading">Best Seller in this Category</h2>
+      <div class="home-grid" id="bestSellersGrid"></div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Sticky mobile add-to-bag bar, revealed once the main CTA scrolls out of view -->
+<div class="pdp-sticky-bar" id="pdpStickyBar">
+  <img id="pdpStickyThumb" alt="">
+  <div class="pdp-sticky-info">
+    <p class="pdp-sticky-name" id="pdpStickyName"></p>
+    <p class="pdp-sticky-price" id="pdpStickyPrice"></p>
+  </div>
+  <button type="button" class="btn-select-size" id="pdpStickyCta" disabled>SELECT A SIZE</button>
+</div>
+
+<!-- ==========================================================================
+     GLOBAL FOOTER — populated by the site's shared footer script, the same
+     way it's dropped into every other page (index.html, checkout.html).
+     ========================================================================== -->
+<div id="global-footer"></div>
+
+<!-- ===================== LIGHTBOX (image zoom) MODAL ===================== -->
+<div class="modal-overlay" id="lightboxOverlay"></div>
+<div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Image zoom">
+  <button type="button" class="modal-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button type="button" class="pdp-slider-arrow prev" id="lightboxPrev" aria-label="Previous image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <img id="lightboxImage" alt="">
+  <button type="button" class="pdp-slider-arrow next" id="lightboxNext" aria-label="Next image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<!-- ===================== NOTIFY ME (WAITLIST) MODAL ===================== -->
+<div class="modal-overlay" id="waitlistOverlay"></div>
+<div class="waitlist-modal" id="waitlistModal" role="dialog" aria-modal="true" aria-labelledby="waitlistTitle">
+  <button type="button" class="modal-close" id="waitlistClose" aria-label="Close">&times;</button>
+  <div class="waitlist-modal-body">
+    <h3 id="waitlistTitle">Notify me when back in stock</h3>
+    <p class="waitlist-modal-sub" id="waitlistSub">We'll email you the moment this size is restocked.</p>
+
+    <form id="waitlistForm">
+      <label for="waitlistEmail" class="field-label">Email address</label>
+      <input type="email" id="waitlistEmail" name="email" required placeholder="you@example.com" autocomplete="email">
+      <p class="waitlist-error" id="waitlistError" hidden></p>
+      <button type="submit" class="btn-select-size" id="waitlistSubmit">Notify Me</button>
+    </form>
+
+    <div class="waitlist-success" id="waitlistSuccess" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+      <p>You're on the list! We'll email you the moment it's back.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== REPORT THIS PRODUCT MODAL ===================== -->
+<div class="modal-overlay" id="reportOverlay"></div>
+<div class="waitlist-modal report-modal" id="reportModal" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
+  <button type="button" class="modal-close" id="reportClose" aria-label="Close">&times;</button>
+  <div class="waitlist-modal-body">
+    <h3 id="reportTitle">Report this product</h3>
+    <p class="waitlist-modal-sub" id="reportSub">Let us know what's wrong and we'll take a look.</p>
+
+    <form id="reportForm">
+      <label for="reportEmail" class="field-label">Email address</label>
+      <input type="email" id="reportEmail" name="email" required placeholder="you@example.com" autocomplete="email">
+
+      <label for="reportMessage" class="field-label">What's the issue?</label>
+      <textarea id="reportMessage" name="message" required placeholder="Tell us what's wrong with this product…"></textarea>
+
+      <p class="waitlist-error" id="reportError" hidden></p>
+      <button type="submit" class="btn-select-size" id="reportSubmit">Submit Report</button>
+    </form>
+
+    <div class="waitlist-success" id="reportSuccess" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+      <p>Thanks — your report has been submitted. We'll take a look.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     FIREBASE — config, then the data bridge, then this page's own module.
+     Order matters: see each file's own header comment.
+     ========================================================================== -->
+<script type="module" src="js/firebase-config.js"></script>
+<script type="module" src="js/firebase-data.js"></script>
+<script type="module" src="js/product.js"></script>
+</body>
+</html>
